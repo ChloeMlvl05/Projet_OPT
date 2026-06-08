@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journée Immersion — Agence Entreprises OPT-NC</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --red: #D0021B;
+      --red-dark: #A0011A;
+      --red-light: #FDECEA;
+      --red-mid: #F5B3BA;
+      --navy: #0F1E3C;
+      --navy-mid: #1A3060;
+      --gold: #C8860A;
+      --gold-light: #FDF3DC;
+      --green: #007A3D;
+      --green-light: #EAF5EF;
+      --gray: #F5F4F0;
+      --border: #E8E6E0;
+      --text: #1A1A1A;
+      --muted: #777;
+      --surface: #fff;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: var(--gray);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ===== HEADER ===== */
+    .hero {
+      background: var(--navy);
+      color: #fff;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-top {
+      background: var(--red);
+      padding: 10px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hero-top-label {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .85;
+    }
+
+    .hero-top-ref {
+      font-size: 11px;
+      opacity: .7;
+    }
+
+    .hero-body {
+      padding: 52px 48px 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .hero-title {
+      font-size: 38px;
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .hero-title strong {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: #ffb3b8;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .65);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-pill {
+      font-size: 12px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      color: rgba(255, 255, 255, .8);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .hero-pill.hot {
+      background: rgba(208, 2, 27, .35);
+      border-color: rgba(208, 2, 27, .5);
+      color: #ffcccc;
+    }
+
+    .hero-deco {
+      position: absolute;
+      right: 48px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 180px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .04);
+      letter-spacing: -8px;
+      line-height: 1;
+      pointer-events: none;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      padding: 0 48px;
+    }
+
+    .nav-item {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      color: var(--muted);
+      white-space: nowrap;
+      transition: all .15s;
+    }
+
+    .nav-item.active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+
+    .nav-item:hover:not(.active) {
+      color: var(--text);
+    }
+
+    /* ===== LAYOUT ===== */
+    .main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 48px;
+    }
+
+    @media(max-width:700px) {
+      .main {
+        padding: 24px 20px;
+      }
+
+      .hero-body {
+        padding: 32px 20px 36px;
+      }
+
+      .hero-top {
+        padding: 10px 20px;
+      }
+
+      .nav {
+        padding: 0 20px;
+      }
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    /* ===== COMPOSANTS ===== */
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .badge-red {
+      background: var(--red-light);
+      color: var(--red-dark);
+    }
+
+    .badge-navy {
+      background: #E8EDF5;
+      color: var(--navy-mid);
+    }
+
+    .badge-gold {
+      background: var(--gold-light);
+      color: var(--gold);
+    }
+
+    .badge-green {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .section-intro {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 640px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 24px 28px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .card-sm {
+      padding: 18px 22px;
+    }
+
+    .card-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #bbb;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.75;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media(max-width:700px) {
+
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      position: relative;
+      padding-left: 0;
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 80px 2px 1fr;
+      gap: 0 20px;
+      margin-bottom: 0;
+    }
+
+    .tl-time {
+      text-align: right;
+      padding-top: 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--red);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tl-line-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tl-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px var(--red);
+      margin-top: 20px;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .tl-dot.soft {
+      background: var(--border);
+      box-shadow: 0 0 0 2px var(--border);
+    }
+
+    .tl-dot.gold {
+      background: var(--gold);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+
+    .tl-line {
+      flex: 1;
+      width: 2px;
+      background: var(--border);
+      margin-top: 4px;
+    }
+
+    .tl-content {
+      padding: 12px 0 24px;
+    }
+
+    .tl-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .tl-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .tl-desc {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .tl-tasks {
+      list-style: none;
+    }
+
+    .tl-tasks li {
+      font-size: 12px;
+      color: #444;
+      padding: 5px 0;
+      padding-left: 16px;
+      position: relative;
+      border-bottom: 1px solid #F4F2EE;
+      line-height: 1.5;
+    }
+
+    .tl-tasks li:last-child {
+      border-bottom: none;
+    }
+
+    .tl-tasks li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-size: 11px;
+      top: 6px;
+    }
+
+    .tl-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .tl-defi {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-top: 10px;
+      color: #fff;
+    }
+
+    .tl-defi-label {
+      font-size: 9px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 6px;
+    }
+
+    .tl-defi-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .tl-defi-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .7);
+      line-height: 1.6;
+    }
+
+    /* ===== SCÉNARIOS ENCADREMENT ===== */
+    .scenario-card {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .scenario-head {
+      padding: 18px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .scenario-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .scenario-head-text {}
+
+    .scenario-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .scenario-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .scenario-body {
+      padding: 0 24px 20px;
+    }
+
+    .scenario-pros,
+    .scenario-cons {}
+
+    .sc-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-bottom: 8px;
+      margin-top: 14px;
+    }
+
+    .sc-list {
+      list-style: none;
+    }
+
+    .sc-list li {
+      font-size: 13px;
+      color: #444;
+      padding: 4px 0 4px 18px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .sc-list.pros li::before {
+      content: '+';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .sc-list.cons li::before {
+      content: '−';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: #C0392B;
+    }
+
+    .sc-reco {
+      font-size: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-top: 14px;
+      line-height: 1.6;
+      border-left: 3px solid;
+    }
+
+    /* ===== DÉFI ===== */
+    .defi-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #0A1628 100%);
+      border-radius: 20px;
+      padding: 36px;
+      color: #fff;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .defi-hero::before {
+      content: '⚡';
+      position: absolute;
+      right: 36px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 120px;
+      opacity: .05;
+      pointer-events: none;
+    }
+
+    .defi-tag {
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .defi-tag::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .defi-title {
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .defi-title span {
+      color: #ffb3b8;
+    }
+
+    .defi-sub {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .65);
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 24px;
+    }
+
+    .defi-missions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    @media(max-width:700px) {
+      .defi-missions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .defi-mission {
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .dm-step {
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .4);
+      margin-bottom: 6px;
+    }
+
+    .dm-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .dm-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .6);
+      line-height: 1.6;
+    }
+
+    .defi-section {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .ds-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .ds-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .ds-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .ds-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .ds-body {
+      font-size: 13px;
+      color: #444;
+      line-height: 1.75;
+    }
+
+    .ds-steps {
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .ds-steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F4F2EE;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .ds-steps li:last-child {
+      border-bottom: none;
+    }
+
+    .ds-steps li::before {
+      content: counter(step);
+      min-width: 24px;
+      height: 24px;
+      background: var(--red-light);
+      color: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .livrable-box {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-top: 14px;
+    }
+
+    .lb-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: rgba(255, 255, 255, .45);
+      margin-bottom: 10px;
+    }
+
+    .lb-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .lb-desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .65);
+      line-height: 1.7;
+    }
+
+    .lb-items {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .lb-item {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .1);
+      color: rgba(255, 255, 255, .8);
+      border: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    /* ===== KIT CANDIDAT ===== */
+    .kit-section {}
+
+    .kit-checklist {
+      list-style: none;
+    }
+
+    .kit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .kit-item:last-child {
+      border-bottom: none;
+    }
+
+    .kit-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .15s;
+      margin-top: 1px;
+    }
+
+    .kit-check.checked {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .kit-check.checked::after {
+      content: '✓';
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .kit-item-content {
+      flex: 1;
+    }
+
+    .kit-item-title {
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .kit-item-desc {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .kit-item-tag {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 2px 8px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* ===== FICHE RETOUR ===== */
+    .fiche {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .fiche-head {
+      background: var(--navy);
+      padding: 20px 24px;
+      color: #fff;
+    }
+
+    .fiche-head-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .fiche-head-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .55);
+    }
+
+    .fiche-body {
+      padding: 24px;
+    }
+
+    .fiche-field {
+      margin-bottom: 20px;
+    }
+
+    .fiche-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .fiche-input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #333;
+      background: var(--gray);
+      font-family: inherit;
+      resize: vertical;
+      min-height: 48px;
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    .fiche-input:focus {
+      border-color: var(--red);
+      background: #fff;
+    }
+
+    .fiche-stars {
+      display: flex;
+      gap: 8px;
+    }
+
+    .fiche-star {
+      font-size: 24px;
+      cursor: pointer;
+      opacity: .3;
+      transition: opacity .1s;
+    }
+
+    .fiche-star:hover,
+    .fiche-star.on {
+      opacity: 1;
+    }
+
+    .fiche-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media(max-width:600px) {
+      .fiche-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .fiche-oui-non {
+      display: flex;
+      gap: 8px;
+    }
+
+    .fiche-choice {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all .15s;
+    }
+
+    .fiche-choice:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .fiche-choice.on {
+      background: var(--red-light);
+      border-color: var(--red);
+      color: var(--red-dark);
+    }
+
+    .fiche-submit {
+      width: 100%;
+      padding: 13px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .15s;
+      margin-top: 8px;
+    }
+
+    .fiche-submit:hover {
+      background: var(--red-dark);
+    }
+
+    .fiche-thanks {
+      display: none;
+      text-align: center;
+      padding: 32px;
+    }
+
+    .fiche-thanks-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .fiche-thanks-title {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .fiche-thanks-sub {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ===== CALLOUT ===== */
+    .callout {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .callout-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .callout.info {
+      background: #EBF3FB;
+      color: #0C447C;
+    }
+
+    .callout.gold {
+      background: var(--gold-light);
+      color: #7A5000;
+    }
+
+    .callout.green {
+      background: var(--green-light);
+      color: #1A5C35;
+    }
+
+    .callout.red {
+      background: var(--red-light);
+      color: var(--red-dark);
+    }
+
+    .print-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--navy);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
+      font-family: inherit;
+      transition: background .15s;
+    }
+
+    .print-btn:hover {
+      background: var(--red);
+    }
+
+    @media print {
+
+      .nav,
+      .print-btn {
+        display: none;
+      }
+
+      .section {
+        display: block !important;
+        page-break-before: always;
+      }
+
+      .section:first-child {
+        page-break-before: avoid;
+      }
+
+      body {
+        background: #fff;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero">
+    <div class="hero-top">
+      <span class="hero-top-label">OPT-NC · Agence Entreprises · Programme Immersion</span>
+      <span class="hero-top-ref">OF 2026-03-482 · Confidentiel interne</span>
+    </div>
+    <div class="hero-body">
+      <div class="hero-deco">AE</div>
+      <div class="hero-eyebrow">Cadre officiel</div>
+      <div class="hero-title">
+        La journée <strong>immersion</strong><br>
+        à l'<em>Agence Entreprises</em>
+      </div>
+      <div class="hero-sub">Un dispositif conçu pour donner à chaque candidat·e une lecture réelle et honnête du poste —
+        avant de décider. Une journée pour observer, participer, et relever un défi.</div>
+      <div class="hero-pills">
+        <span class="hero-pill hot">Journée complète · 7h30–16h30</span>
+        <span class="hero-pill">Observe + Participe</span>
+        <span class="hero-pill">Défi de journée</span>
+        <span class="hero-pill">Fiche retour candidat</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-item active" onclick="showTab('cadre', this)">1 · Cadre</div>
+    <div class="nav-item" onclick="showTab('deroulement', this)">2 · Déroulé heure par heure</div>
+    <div class="nav-item" onclick="showTab('encadrement', this)">3 · Scénarios d'encadrement</div>
+    <div class="nav-item" onclick="showTab('defi', this)">4 · Le défi de journée</div>
+    <div class="nav-item" onclick="showTab('kit', this)">5 · Kit candidat</div>
+    <div class="nav-item" onclick="showTab('retour', this)">6 · Fiche de retour</div>
+  </nav>
+
+  <div class="main">
+
+    <!-- ============================= 1. CADRE ============================= -->
+    <div class="section active" id="cadre">
+      <div class="section-header">
+        <div class="section-badge badge-navy">Section 1</div>
+        <div class="section-title">Cadre de la journée immersion</div>
+        <div class="section-intro">Ce document définit les règles du jeu pour les deux parties — le candidat et l'Agence
+          Entreprises. Une immersion n'est ni un entretien déguisé, ni une journée d'observation passive. C'est une
+          expérience structurée, avec un objectif double.</div>
+      </div>
+
+      <div class="callout gold">
+        <span class="callout-icon">💡</span>
+        <span><strong>Principe fondateur :</strong> La journée immersion est une mesure volontaire et bienveillante
+          proposée par l'OPT-NC. Elle ne remplace pas le processus de candidature via le Service Emploi — elle
+          l'éclaire. Le candidat reste libre de candidater ou non à l'issue.</span>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:16px">
+        <div class="card">
+          <div class="card-label">Côté candidat — ce que la journée lui apporte</div>
+          <div class="card-body">
+            <ul style="list-style:none; padding:0;">
+              <li
+                style="padding:7px 0; border-bottom:1px solid #F4F2EE; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--red)">→</span> Voir les missions du poste telles
+                qu'elles sont réellement, pas telles qu'elles sont décrites sur papier</li>
+              <li
+                style="padding:7px 0; border-bottom:1px solid #F4F2EE; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--red)">→</span> Rencontrer l'équipe et ressentir
+                l'ambiance de travail de l'AE</li>
+              <li
+                style="padding:7px 0; border-bottom:1px solid #F4F2EE; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--red)">→</span> Tester ses propres réflexes en
+                situation quasi-réelle via le défi de journée</li>
+              <li
+                style="padding:7px 0; border-bottom:1px solid #F4F2EE; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--red)">→</span> Décider ensuite, en connaissance de
+                cause, de candidater ou non</li>
+              <li
+                style="padding:7px 0; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--red)">→</span> Se faire remarquer naturellement si le
+                feeling et les compétences sont au rendez-vous</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-label">Côté AE — ce que la journée apporte au service</div>
+          <div class="card-body">
+            <ul style="list-style:none; padding:0;">
+              <li
+                style="padding:7px 0; border-bottom:1px solid #F4F2EE; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--green)">+</span> Observer le comportement naturel d'un
+                candidat en situation (sans pression d'entretien)</li>
+              <li
+                style="padding:7px 0; border-bottom:1px solid #F4F2EE; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--green)">+</span> Repérer les profils à fort potentiel
+                avant même la candidature officielle</li>
+              <li
+                style="padding:7px 0; border-bottom:1px solid #F4F2EE; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--green)">+</span> Identifier les candidat·es qui
+                correspondent à la culture AE — pas seulement au profil papier</li>
+              <li
+                style="padding:7px 0; border-bottom:1px solid #F4F2EE; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--green)">+</span> Valoriser le service auprès de
+                l'interne OPT-NC et renforcer l'attractivité du poste</li>
+              <li
+                style="padding:7px 0; padding-left:16px; position:relative; font-size:13px; color:#444; line-height:1.5">
+                <span style="position:absolute;left:0;color:var(--green)">+</span> Déclencher des candidatures de
+                qualité sur une offre qui n'en a pas encore reçu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Règles du jeu — ce qui s'applique aux deux parties</div>
+        <div class="grid-2" style="margin-top:8px; gap:20px">
+          <div>
+            <div
+              style="font-size:12px; font-weight:600; color:#333; margin-bottom:10px; text-transform:uppercase; letter-spacing:.05em">
+              Ce que l'immersion EST</div>
+            <ul class="tl-tasks" style="border:none">
+              <li>Une journée d'observation et de participation active</li>
+              <li>Un cadre bienveillant et sans jugement formel</li>
+              <li>Une opportunité de se montrer sous son meilleur jour naturellement</li>
+              <li>Un engagement de confidentialité des deux côtés</li>
+              <li>Une expérience qui peut mener à une candidature motivée</li>
+            </ul>
+          </div>
+          <div>
+            <div
+              style="font-size:12px; font-weight:600; color:#C0392B; margin-bottom:10px; text-transform:uppercase; letter-spacing:.05em">
+              Ce que l'immersion N'EST PAS</div>
+            <ul style="list-style:none; padding:0">
+              <li
+                style="padding:5px 0 5px 16px; position:relative; font-size:12px; color:#555; border-bottom:1px solid #F4F2EE; line-height:1.5">
+                <span style="position:absolute;left:0;color:#C0392B">✕</span>Un entretien d'embauche déguisé</li>
+              <li
+                style="padding:5px 0 5px 16px; position:relative; font-size:12px; color:#555; border-bottom:1px solid #F4F2EE; line-height:1.5">
+                <span style="position:absolute;left:0;color:#C0392B">✕</span>Une journée de travail rémunérée</li>
+              <li
+                style="padding:5px 0 5px 16px; position:relative; font-size:12px; color:#555; border-bottom:1px solid #F4F2EE; line-height:1.5">
+                <span style="position:absolute;left:0;color:#C0392B">✕</span>Une garantie d'embauche</li>
+              <li
+                style="padding:5px 0 5px 16px; position:relative; font-size:12px; color:#555; border-bottom:1px solid #F4F2EE; line-height:1.5">
+                <span style="position:absolute;left:0;color:#C0392B">✕</span>Un test éliminatoire</li>
+              <li style="padding:5px 0 5px 16px; position:relative; font-size:12px; color:#555; line-height:1.5"><span
+                  style="position:absolute;left:0;color:#C0392B">✕</span>Un remplacement d'agent ou un renfort de
+                service</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card card-sm" style="border-top:3px solid var(--red)">
+          <div class="card-label">Durée</div>
+          <div class="card-title">Journée complète</div>
+          <div class="card-body">7h30 → 16h30. Pause déjeuner incluse. Adaptable selon disponibilités AE.</div>
+        </div>
+        <div class="card card-sm" style="border-top:3px solid var(--navy)">
+          <div class="card-label">Lieu</div>
+          <div class="card-title">Agence Entreprises</div>
+          <div class="card-body">9 rue Galliéni, Nouméa. Accueil à l'entrée dès 7h20 par le référent désigné.</div>
+        </div>
+        <div class="card card-sm" style="border-top:3px solid var(--gold)">
+          <div class="card-label">Accès</div>
+          <div class="card-title">Sur inscription</div>
+          <div class="card-body">Contact via le référent RH ou le chef de centre. 1 à 2 candidats max par session pour
+            ne pas perturber le service.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================= 2. DÉROULÉ ============================= -->
+    <div class="section" id="deroulement">
+      <div class="section-header">
+        <div class="section-badge badge-red">Section 2</div>
+        <div class="section-title">Déroulé heure par heure</div>
+        <div class="section-intro">Chaque moment de la journée a un objectif précis. Le candidat n'est jamais en attente
+          — il est toujours en action ou en observation active. Le défi de journée (voir section 4) est remis à 9h00 et
+          rendu à 15h45.</div>
+      </div>
+
+      <div class="timeline">
+
+        <!-- 7h30 -->
+        <div class="tl-item">
+          <div class="tl-time">7h30</div>
+          <div class="tl-line-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:#E8EDF5; color:var(--navy)">Accueil</span>
+            <div class="tl-title">Arrivée & mise en contexte</div>
+            <div class="tl-desc">Accueil par le référent désigné. Présentation rapide du service, remise du badge
+              visiteur, tour de l'espace de travail. Café + présentation informelle à l'équipe présente.</div>
+            <ul class="tl-tasks">
+              <li>Remise du <strong>kit candidat</strong> papier (carnet de bord + brief de journée)</li>
+              <li>Explication des règles : observer, poser des questions, participer si invité</li>
+              <li>Présentation de l'organisation de la journée et du défi remis à 9h00</li>
+            </ul>
+            <div class="tl-note">☕ Moment détendu, pas de pression. L'objectif est de mettre le candidat à l'aise avant
+              le rush du service.</div>
+          </div>
+        </div>
+
+        <!-- 8h00 -->
+        <div class="tl-item">
+          <div class="tl-time">8h00</div>
+          <div class="tl-line-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:var(--red-light); color:var(--red-dark)">Observation active</span>
+            <div class="tl-title">Ouverture du service — le rush du matin</div>
+            <div class="tl-desc">Le candidat observe en position de binôme l'ouverture du service : accueil physique,
+              décrochés téléphoniques, gestion des premières demandes clients entreprises.</div>
+            <ul class="tl-tasks">
+              <li>Observer la posture d'accueil physique : comment on reçoit un client entreprise</li>
+              <li>Écouter 2 à 3 appels entrants commentés à voix basse par le référent</li>
+              <li>Comprendre la différence entre une demande simple et une demande escaladée</li>
+              <li>Prendre des notes dans son carnet de bord</li>
+            </ul>
+            <div class="tl-note">📞 Le candidat n'intervient pas sur les appels — il observe et analyse.</div>
+          </div>
+        </div>
+
+        <!-- 9h00 -->
+        <div class="tl-item">
+          <div class="tl-time">8h30</div>
+          <div class="tl-line-col">
+            <div class="tl-dot gold"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:var(--gold-light); color:var(--gold)">⚡ Défi remis</span>
+            <div class="tl-title">Remise du défi de journée</div>
+            <div class="tl-desc">Le référent remet au candidat son brief de défi — une mission concrète à accomplir au
+              fil de la journée, en parallèle de ses observations (voir section 4 pour le détail complet).</div>
+            <div class="tl-defi">
+              <div class="tl-defi-label">Défi de journée — aperçu</div>
+              <div class="tl-defi-title">Opération "Fiche Premier Contact Client Entreprise"</div>
+              <div class="tl-defi-desc">À partir de ce que tu observes aujourd'hui, réponds à une question en détaillant au maximum ton déroulé,
+                exemple : Si demain tu accueilles pour la première fois un nouveau client entreprise à l'AE, comment tu procèdes ?
+                Tu as jusqu'à 15h45. Détails section 4.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9h30 -->
+        <div class="tl-item">
+          <div class="tl-time">9h00</div>
+          <div class="tl-line-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:var(--green-light); color:var(--green)">Participation</span>
+            <div class="tl-title">Back-office — traitement des courriers & demandes</div>
+            <div class="tl-desc">Le candidat rejoint un agent pour observer et participer à la gestion des demandes en
+              back-office : courriers électroniques, papiers, saisies dans les outils métiers.</div>
+            <ul class="tl-tasks">
+              <li>Observer le flux de courriers entrants et leur priorisation</li>
+              <li>Participer à la saisie d'une demande simple dans l'outil bureautique (guidé)</li>
+              <li>Comprendre le circuit d'une demande client de A à Z</li>
+              <li>Identifier dans son carnet : "qu'est-ce que j'aurais fait différemment ?"</li>
+            </ul>
+            <div class="tl-note">🖥️ Accès aux outils en mode visualisation uniquement. L'agent explique chaque étape en
+              temps réel.</div>
+          </div>
+        </div>
+
+        <!-- 11h00 -->
+        <div class="tl-item">
+          <div class="tl-time">10h30</div>
+          <div class="tl-line-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:var(--red-light); color:var(--red-dark)">Observation active</span>
+            <div class="tl-title">Accueil physique — client entreprise en direct</div>
+            <div class="tl-desc">Retour en zone accueil. Le candidat observe plusieurs interactions client en direct, en
+              se positionnant légèrement en retrait mais dans la salle. Après chaque interaction, le référent lui
+              explique les choix faits.</div>
+            <ul class="tl-tasks">
+              <li>Observer la posture, le langage, la reformulation en situation réelle</li>
+              <li>Identifier les typologies de clients entreprises qui se présentent</li>
+              <li>Repérer les moments où l'agent fait appel à un collègue ou remonte au commercial</li>
+              <li>Compléter sa grille d'observation pour le défi de journée</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 12h00 -->
+        <div class="tl-item">
+          <div class="tl-time">12h00</div>
+          <div class="tl-line-col">
+            <div class="tl-dot soft"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:#F0EEE8; color:#666">Pause</span>
+            <div class="tl-title">Déjeuner avec un ou deux membres de l'équipe</div>
+            <div class="tl-desc">Moment informel, non noté, conçu pour une conversation naturelle. L'équipe partage son
+              vécu, le candidat pose les questions qu'il n'ose pas poser en situation de service.</div>
+            <ul class="tl-tasks">
+              <li>Questions libres sur le quotidien, les collègues, les défis du poste</li>
+              <li>Partage des premières impressions du matin</li>
+              <li>Avancement éventuel sur le défi de journée</li>
+            </ul>
+            <div class="tl-note">🍽️ L'équipe invite le candidat — moment convivial, pas de cafétéria seul.</div>
+          </div>
+        </div>
+
+        <!-- 13h30 -->
+        <div class="tl-item">
+          <div class="tl-time">13h30</div>
+          <div class="tl-line-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:var(--green-light); color:var(--green)">Participation</span>
+            <div class="tl-title">Action commerciale — préparation d'une opération</div>
+            <div class="tl-desc">Le candidat participe à la préparation d'une action commerciale en cours (mailing
+              client, organisation d'un salon ou relance téléphonique). Il contribue activement à une tâche délimitée.
+            </div>
+            <ul class="tl-tasks">
+              <li>Tâche concrète déléguée : publipostage, mise à jour de liste, ou préparation de supports</li>
+              <li>Travail en autonomie sur 30 min, puis feedback de l'agent référent</li>
+              <li>Comprendre comment le back-office alimente le travail commercial terrain</li>
+            </ul>
+            <div class="tl-note">✏️ Premier moment où le candidat travaille seul sur une tâche réelle. C'est ici qu'on
+              voit les réflexes d'organisation naturels.</div>
+          </div>
+        </div>
+
+        <!-- 14h30 -->
+        <div class="tl-item">
+          <div class="tl-time">14h30</div>
+          <div class="tl-line-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:var(--red-light); color:var(--red-dark)">Observation active</span>
+            <div class="tl-title">Scénario de gestion de demande complexe</div>
+            <div class="tl-desc">L'agent référent rejoue (ou laisse vivre naturellement) une demande client un peu plus
+              complexe — réclamation, demande multi-service, ou client difficile. Le candidat observe la gestion
+              complète.</div>
+            <ul class="tl-tasks">
+              <li>Observer la gestion du stress et du ton face à un client exigeant</li>
+              <li>Repérer les techniques de reformulation et de résolution utilisées</li>
+              <li>Noter dans son carnet : "comment j'aurais géré cette situation ?"</li>
+            </ul>
+            <div class="tl-note">🎭 Si aucune situation complexe ne se présente naturellement, le référent peut rejouer
+              un cas réel vécu.</div>
+          </div>
+        </div>
+
+        <!-- 15h00 -->
+        <div class="tl-item">
+          <div class="tl-time">15h00</div>
+          <div class="tl-line-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:#F0EEE8; color:#666">Temps libre guidé</span>
+            <div class="tl-title">Finalisation du défi + questions libres</div>
+            <div class="tl-desc">Le candidat dispose de 45 minutes pour finaliser et remettre au propre son défi de journée et poser toutes
+              les questions restantes — au référent, ou à d'autres agents de l'équipe disponibles.</div>
+            <ul class="tl-tasks">
+              <li>Finalisation de la fiche d'accueil (défi de journée)</li>
+              <li>Questions sur le parcours, les évolutions possibles, la culture de l'AE</li>
+              <li>Rédaction de ses premières impressions dans le carnet de bord</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 15h45 -->
+        <div class="tl-item">
+          <div class="tl-time">15h45</div>
+          <div class="tl-line-col">
+            <div class="tl-dot gold"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:var(--gold-light); color:var(--gold)">⚡ Défi rendu</span>
+            <div class="tl-title">Rendu du défi & débriefing collectif</div>
+            <div class="tl-desc">Le candidat remet sa production au référent. Séance de débriefing court (15 min) : le
+              référent donne un retour sincère et bienveillant sur le défi, sans notation formelle.</div>
+            <ul class="tl-tasks">
+              <li>Retour oral sur le défi : points forts, angles non vus, pertinence des choix</li>
+              <li>Le candidat explique ses choix — dialogue, pas évaluation</li>
+              <li>Le référent partage son ressenti sur la journée de façon honnête</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 16h15 -->
+        <div class="tl-item">
+          <div class="tl-time">16h15</div>
+          <div class="tl-line-col">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <span class="tl-tag" style="background:var(--red-light); color:var(--red-dark)">Clôture</span>
+            <div class="tl-title">Bilan personnel & prochaines étapes</div>
+            <div class="tl-desc">Le candidat remplit la fiche de retour candidat (section 6). Le référent explique les
+              suites : comment candidater via le SE, délai de réponse, et remercie le candidat pour sa présence.</div>
+            <ul class="tl-tasks">
+              <li>Remise et remplissage de la fiche de retour candidat</li>
+              <li>Rappel du lien Service Emploi Province Sud + référence OF 2026-03-482</li>
+              <li>Échange de contacts si le candidat a des questions ultérieures</li>
+            </ul>
+            <div class="tl-note">👋 Départ entre 16h30 et 17h00. Le candidat repart avec son carnet de bord et la fiche
+              récap de l'offre.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================= 3. ENCADREMENT ============================= -->
+    <div class="section" id="encadrement">
+      <div class="section-header">
+        <div class="section-badge badge-navy">Section 3</div>
+        <div class="section-title">Scénarios d'encadrement</div>
+        <div class="section-intro">Trois façons d'organiser l'encadrement selon les ressources disponibles à l'AE.
+          Chaque scénario a ses avantages — le choix dépend de la taille de l'équipe, de la charge du jour et de
+          l'ambition du dispositif.</div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">ℹ️</span>
+        <span>Quelle que soit la formule choisie, un point est non-négociable : le candidat doit toujours savoir à qui
+          s'adresser à tout moment de la journée. L'improvisation de l'encadrement se ressent et dégrade l'image du
+          service.</span>
+      </div>
+
+      <!-- Scénario A -->
+      <div class="scenario-card">
+        <div class="scenario-head">
+          <div class="scenario-num" style="background:#E8EDF5; color:var(--navy)">A</div>
+          <div class="scenario-head-text">
+            <div class="scenario-title">Le binôme unique — "L'agent référent"</div>
+            <div class="scenario-subtitle">Un seul agent désigné accompagne le candidat sur toute la journée</div>
+          </div>
+        </div>
+        <div class="scenario-body">
+          <div class="card-body" style="margin-bottom:12px">
+            Un agent volontaire et expérimenté de l'AE est désigné comme "référent immersion" pour la journée. Il porte
+            le candidat de 7h30 à 16h30 : il explique, commente, délègue les tâches du défi, et donne le débriefing
+            final.
+          </div>
+          <div class="sc-label" style="color:var(--green)">✓ Avantages</div>
+          <ul class="sc-list pros">
+            <li>Relation de confiance construite sur la durée de la journée</li>
+            <li>Cohérence du discours et de l'expérience candidate</li>
+            <li>Le candidat a un interlocuteur clair à tout moment</li>
+            <li>Plus simple à organiser pour le chef de centre</li>
+          </ul>
+          <div class="sc-label" style="color:#C0392B">− Points de vigilance</div>
+          <ul class="sc-list cons">
+            <li>L'agent référent est moins disponible pour ses propres missions ce jour-là</li>
+            <li>Le candidat ne voit qu'un seul profil d'agent — moins de richesse de points de vue</li>
+            <li>Risque de biais si l'agent et le candidat ne "matchent" pas humainement</li>
+          </ul>
+          <div class="sc-reco" style="background:#E8EDF5; border-color:var(--navy); color:var(--navy-mid)">
+            💡 <strong>Recommandé pour :</strong> les petites équipes AE ou les jours à forte charge. Idéal si un agent
+            senior est disponible et motivé pour jouer le rôle de référent.
+          </div>
+        </div>
+      </div>
+
+      <!-- Scénario B -->
+      <div class="scenario-card">
+        <div class="scenario-head">
+          <div class="scenario-num" style="background:var(--red-light); color:var(--red-dark)">B</div>
+          <div class="scenario-head-text">
+            <div class="scenario-title">Le parcours tournant — "Immersion à 360°"</div>
+            <div class="scenario-subtitle">Plusieurs agents prennent en charge le candidat selon les créneaux</div>
+          </div>
+        </div>
+        <div class="scenario-body">
+          <div class="card-body" style="margin-bottom:12px">
+            La journée est découpée en 4 blocs horaires. Chaque bloc est confié à un agent différent, selon sa
+            spécialité (accueil, back-office, commercial). Un agent coordinateur reste le point de contact global du
+            candidat.
+          </div>
+          <div
+            style="background:var(--gray); border-radius:10px; padding:16px; margin-bottom:12px; font-size:12px; color:#444; line-height:1.7">
+            <strong>Exemple de répartition :</strong><br>
+            7h30–9h00 → Agent coordinateur (accueil, mise en contexte, remise du défi)<br>
+            9h00–10h30 → Agent back-office (courriers, outils, saisies)<br>
+            10h30–12h00 → Agent accueil senior (interactions clients en direct)<br>
+            13h30–15h00 → Agent commercial (action marketing, relances, tâche autonome)<br>
+            15h00–15h45 → Autonomie du candidat avec soutien des # agents (Finalisation du défi, mise au propre)<br>
+            15h45–16h30 → Agent coordinateur (rendu défi, débriefing, clôture)
+          </div>
+          <div class="sc-label" style="color:var(--green)">✓ Avantages</div>
+          <ul class="sc-list pros">
+            <li>Le candidat découvre plusieurs facettes du poste et de l'équipe</li>
+            <li>Moins de charge sur un seul agent référent</li>
+            <li>Vision plus riche et plus complète de la réalité du service</li>
+            <li>Chaque agent reste concentré sur son cœur de métier</li>
+          </ul>
+          <div class="sc-label" style="color:#C0392B">− Points de vigilance</div>
+          <ul class="sc-list cons">
+            <li>Nécessite une coordination préalable entre agents — brief interne obligatoire</li>
+            <li>Le candidat peut se sentir "balloté" si les transitions ne sont pas fluides</li>
+            <li>Risque de discours incohérents si chaque agent improvise son message</li>
+          </ul>
+          <div class="sc-reco" style="background:var(--red-light); border-color:var(--red); color:var(--red-dark)">
+            💡 <strong>Recommandé pour :</strong> les équipes de taille moyenne avec des agents volontaires. Nécessite
+            un brief collectif de 15 min la veille ou le matin même. <strong>C'est le format le plus riche pour le
+              candidat.</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scénario C -->
+      <div class="scenario-card">
+        <div class="scenario-head">
+          <div class="scenario-num" style="background:var(--gold-light); color:var(--gold)">C</div>
+          <div class="scenario-head-text">
+            <div class="scenario-title">Le chef de centre pilote — "L'immersion avec vision"</div>
+            <div class="scenario-subtitle">Le chef de centre prend en charge l'accueil et le débriefing, les agents
+              gèrent le reste</div>
+          </div>
+        </div>
+        <div class="scenario-body">
+          <div class="card-body" style="margin-bottom:12px">
+            Le chef de centre intervient sur deux moments clés : l'accueil du matin (7h30 → 8h00) et le débriefing final
+            (15h45 → 16h30). Le reste de la journée est géré par les agents. Cela donne une portée institutionnelle
+            forte à la démarche.
+          </div>
+          <div class="sc-label" style="color:var(--green)">✓ Avantages</div>
+          <ul class="sc-list pros">
+            <li>Signal fort envoyé au candidat : le service prend la démarche au sérieux</li>
+            <li>Le chef de centre a une vision globale pour le débriefing final</li>
+            <li>Valorise l'image du service et de l'OPT-NC</li>
+            <li>Le candidat se sent accueilli au bon niveau hiérarchique</li>
+          </ul>
+          <div class="sc-label" style="color:#C0392B">− Points de vigilance</div>
+          <ul class="sc-list cons">
+            <li>Mobilise le chef de centre sur deux créneaux — à anticiper dans son agenda</li>
+            <li>Si les agents intermédiaires ne sont pas briefés, l'expérience du milieu de journée peut décrocher</li>
+          </ul>
+          <div class="sc-reco" style="background:var(--gold-light); border-color:var(--gold); color:#7A5000">
+            💡 <strong>Recommandé pour :</strong> quand on veut donner un caractère officiel et sérieux à la démarche.
+            Combinable avec le scénario A ou B pour le cœur de journée. <strong>Format idéal si l'objectif est aussi de
+              repérer un talent.</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout green">
+        <span class="callout-icon">🏆</span>
+        <span><strong>Recommandation finale :</strong> Le format optimal pour l'AE est une <strong>combinaison B +
+            C</strong> — le chef de centre ouvre et ferme la journée, les agents tournent sur les créneaux du milieu.
+          Cela maximise l'expérience candidat tout en répartissant la charge sur l'équipe.</span>
+      </div>
+    </div>
+
+    <!-- ============================= 4. DÉFI ============================= -->
+    <div class="section" id="defi">
+      <div class="section-header">
+        <div class="section-badge badge-gold">Section 4</div>
+        <div class="section-title">Le défi de journée</div>
+        <div class="section-intro">Le défi est le cœur innovant de l'immersion. Il transforme l'observation passive en
+          engagement actif. Il est remis à 9h00, travaillé tout au long de la journée au fil des observations, et rendu
+          à 15h45.</div>
+      </div>
+
+      <div class="defi-hero">
+        <div class="defi-tag">Opération</div>
+        <div class="defi-title">
+          "Premier contact"<br>
+          <span>Crée la meilleure expérience d'accueil possible</span>
+        </div>
+        <div class="defi-sub">
+          À partir de tout ce que tu observes aujourd'hui à l'Agence Entreprises, tu vas construire un outil concret qui
+          pourrait réellement servir au service. Pas un exercice théorique — une production utile, ancrée dans ce que tu
+          vois.
+        </div>
+        <div class="defi-missions">
+          <div class="defi-mission">
+            <div class="dm-step">Mission 1</div>
+            <div class="dm-title">Observer & analyser</div>
+            <div class="dm-desc">Tout au long de la journée, identifie les moments clés du parcours d'un client
+              entreprise à l'AE.</div>
+          </div>
+          <div class="defi-mission">
+            <div class="dm-step">Mission 2</div>
+            <div class="dm-title">Construire</div>
+            <div class="dm-desc">Rédige une "fiche d'accueil idéale" — le guide du parfait premier contact client, selon
+              toi.</div>
+          </div>
+          <div class="defi-mission">
+            <div class="dm-step">Mission 3</div>
+            <div class="dm-title">Défendre</div>
+            <div class="dm-desc">À 15h45, explique tes choix au référent. Pourquoi ces étapes ? Qu'as-tu appris que tu
+              n'attendais pas ?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="defi-section">
+        <div class="ds-header">
+          <div class="ds-icon">📋</div>
+          <div>
+            <div class="ds-title">La mission en détail — ce que le candidat doit produire</div>
+            <div class="ds-sub">Format libre, remis sur papier ou support numérique si disponible</div>
+          </div>
+        </div>
+        <div class="ds-body">
+          Le candidat doit remettre une <strong>"Fiche Premier Contact Client Entreprise"</strong> — un document d'une
+          page (ou deux maximum) qui répondrait à la question : <em>"Si demain tu accueilles pour la première fois un
+            nouveau client entreprise à l'AE, comment tu procèdes ?"</em>
+        </div>
+        <ol class="ds-steps" style="margin-top:16px">
+          <li><strong>L'accueil physique :</strong> que dit-on, comment on se présente, quelle posture on adopte.
+            Quelles infos collecter en premier.</li>
+          <li><strong>L'accueil téléphonique :</strong> les 3 premières phrases d'un appel entrant parfait selon ce
+            qu'il a observé.</li>
+          <li><strong>La gestion d'une demande :</strong> comment on écoute, on reformule, on oriente. Que faire si on
+            ne sait pas répondre ?</li>
+          <li><strong>La situation compliquée :</strong> comment on gère un client mécontent ou une demande complexe.
+            Quelle est la règle d'or selon lui ?</li>
+          <li><strong>La surprise du jour :</strong> une chose qu'il n'avait pas anticipée sur le poste, et ce que ça
+            change dans sa vision du métier.</li>
+        </ol>
+        <div class="livrable-box">
+          <div class="lb-label">Livrable attendu à 15h45</div>
+          <div class="lb-title">Fiche "Premier Contact Client Entreprise"</div>
+          <div class="lb-desc">1 à 2 pages, format libre. À remettre à l'agent référent. Pas de mise en forme exigée —
+            ce qui compte c'est la pertinence des observations et la capacité à en tirer des règles opérationnelles
+            concrètes.</div>
+          <div class="lb-items">
+            <span class="lb-item">Accueil physique</span>
+            <span class="lb-item">Accueil téléphonique</span>
+            <span class="lb-item">Gestion de demande</span>
+            <span class="lb-item">Situation compliquée</span>
+            <span class="lb-item">La surprise du jour</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="defi-section">
+        <div class="ds-header">
+          <div class="ds-icon">🎯</div>
+          <div>
+            <div class="ds-title">Ce qu'on observe vraiment à travers ce défi</div>
+            <div class="ds-sub">Ce que le défi révèle sans le dire — côté service</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div>
+            <div
+              style="font-size:12px; font-weight:600; color:#333; margin-bottom:10px; text-transform:uppercase; letter-spacing:.05em">
+              Compétences révélées</div>
+            <ul class="tl-tasks" style="border:none">
+              <li><strong>Sens de l'observation :</strong> a-t-il remarqué les bons moments ?</li>
+              <li><strong>Synthèse et structuration :</strong> peut-il mettre de l'ordre dans ce qu'il voit ?</li>
+              <li><strong>Empathie client :</strong> parle-t-il du client ou de la procédure ?</li>
+              <li><strong>Prise d'initiative :</strong> a-t-il posé des questions pour compléter ses lacunes ?</li>
+              <li><strong>Lucidité :</strong> sa "surprise du jour" révèle sa maturité de lecture</li>
+            </ul>
+          </div>
+          <div>
+            <div
+              style="font-size:12px; font-weight:600; color:#333; margin-bottom:10px; text-transform:uppercase; letter-spacing:.05em">
+              Signaux positifs à repérer</div>
+            <ul class="tl-tasks" style="border:none">
+              <li>Il parle du ressenti client, pas juste des étapes</li>
+              <li>Il a une "règle d'or" personnelle et sait l'argumenter</li>
+              <li>Sa surprise révèle une vraie curiosité pour le métier</li>
+              <li>Il s'approprie le vocabulaire du service naturellement</li>
+              <li>Sa fiche pourrait presque être utilisée telle quelle</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="defi-section">
+        <div class="ds-header">
+          <div class="ds-icon">🔁</div>
+          <div>
+            <div class="ds-title">Variantes du défi selon le profil du candidat</div>
+            <div class="ds-sub">Si plusieurs candidats font l'immersion à des dates différentes, varier le défi</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card card-sm" style="margin-bottom:0; border-left:3px solid var(--gold)">
+            <div class="card-label">Variante B — Profil plutôt commercial</div>
+            <div class="card-title">"Pitch de l'AE"</div>
+            <div class="card-body">Si tu devais convaincre un chef d'entreprise de choisir l'OPT-NC plutôt qu'un
+              concurrent, qu'est-ce que tu lui dirais après cette journée ? Rédige les 5 arguments clés que tu aurais
+              appris aujourd'hui.</div>
+          </div>
+          <div class="card card-sm" style="margin-bottom:0; border-left:3px solid var(--navy)">
+            <div class="card-label">Variante C — Profil plutôt organisé/bureau</div>
+            <div class="card-title">"Ma journée idéale"</div>
+            <div class="card-body">Après ce que tu as vu, comment organiserais-tu ta propre journée de travail si tu
+              prenais le poste demain ? Décris ta routine idéale heure par heure, avec les priorités que tu te fixerais.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================= 5. KIT CANDIDAT ============================= -->
+    <div class="section" id="kit">
+      <div class="section-header">
+        <div class="section-badge badge-green">Section 5</div>
+        <div class="section-title">Kit candidat — ce qu'il faut apporter et préparer</div>
+        <div class="section-intro">Ce que le candidat doit avoir avec lui le jour J, et comment il peut préparer sa
+          journée la veille pour en tirer le maximum. À remettre avec la convocation d'immersion.</div>
+      </div>
+
+      <div class="callout red">
+        <span class="callout-icon">📬</span>
+        <span>Ce kit est remis au candidat lors de la confirmation de sa journée immersion — idéalement par email, avec
+          un récap de l'heure d'arrivée, le nom du référent, et l'adresse exacte du site.</span>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:20px; align-items:start">
+        <div>
+          <div class="card">
+            <div class="card-label">À apporter le jour J</div>
+            <ul class="kit-checklist" id="kitlist1">
+              <li class="kit-item">
+                <div class="kit-check" onclick="toggleCheck(this)"></div>
+                <div class="kit-item-content">
+                  <div class="kit-item-title">Une pièce d'identité</div>
+                  <div class="kit-item-desc">Pour le badge visiteur à l'accueil OPT-NC.</div>
+                </div>
+                <span class="kit-item-tag" style="background:#FDECEA; color:#A0001A">Obligatoire</span>
+              </li>
+              <li class="kit-item">
+                <div class="kit-check" onclick="toggleCheck(this)"></div>
+                <div class="kit-item-content">
+                  <div class="kit-item-title">Un carnet et un stylo</div>
+                  <div class="kit-item-desc">Pour les observations tout au long de la journée. Le carnet de bord est
+                    l'outil de travail principal du défi.</div>
+                </div>
+                <span class="kit-item-tag" style="background:#FDECEA; color:#A0001A">Obligatoire</span>
+              </li>
+              <li class="kit-item">
+                <div class="kit-check" onclick="toggleCheck(this)"></div>
+                <div class="kit-item-content">
+                  <div class="kit-item-title">Une tenue professionnelle</div>
+                  <div class="kit-item-desc">L'AE reçoit des clients entreprises. Tenue de ville soignée attendue — ni
+                    formelle ni décontractée à l'excès.</div>
+                </div>
+                <span class="kit-item-tag" style="background:#FDECEA; color:#A0001A">Obligatoire</span>
+              </li>
+              <li class="kit-item">
+                <div class="kit-check" onclick="toggleCheck(this)"></div>
+                <div class="kit-item-content">
+                  <div class="kit-item-title">Son téléphone (mode silencieux)</div>
+                  <div class="kit-item-desc">Pour des recherches éventuelles, prendre des photos de supports si
+                    autorisé, ou noter des idées rapidement.</div>
+                </div>
+                <span class="kit-item-tag" style="background:#F0EEE8; color:#666">Recommandé</span>
+              </li>
+              <li class="kit-item">
+                <div class="kit-check" onclick="toggleCheck(this)"></div>
+                <div class="kit-item-content">
+                  <div class="kit-item-title">De quoi déjeuner (optionnel)</div>
+                  <div class="kit-item-desc">La pause déjeuner est offerte avec l'équipe, mais prévoir une alternative
+                    si besoin.</div>
+                </div>
+                <span class="kit-item-tag" style="background:#F0EEE8; color:#666">Optionnel</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-label">À préparer la veille — 3 choses simples</div>
+            <ol class="ds-steps">
+              <li>
+                <div><strong>Se renseigner sur l'OPT-NC</strong><br><span
+                    style="font-size:12px; color:var(--muted)">Visiter le site opt.nc, regarder les offres entreprises
+                    disponibles, comprendre les grandes lignes des produits télécom proposés aux professionnels. Ne pas
+                    tout retenir — juste avoir une idée générale.</span></div>
+              </li>
+              <li>
+                <div><strong>Préparer 5 questions sur le poste</strong><br><span
+                    style="font-size:12px; color:var(--muted)">Les noter dans son carnet. Des questions concrètes, pas
+                    génériques : "comment gérez-vous un client qui rappelle 3 fois pour le même problème ?" vaut mieux
+                    que "est-ce que vous aimez travailler ici ?"</span></div>
+              </li>
+              <li>
+                <div><strong>Se projeter dans le défi</strong><br><span style="font-size:12px; color:var(--muted)">Le
+                    brief du défi lui est remis le matin, mais il peut anticiper : "qu'est-ce qu'un bon accueil client
+                    professionnel, selon moi ?" Avoir un point de départ personnel rend le défi plus riche.</span></div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="card" style="background:var(--navy); border-color:var(--navy); color:#fff">
+            <div class="card-label" style="color:rgba(255,255,255,.45)">Ce que le service prépare de son côté</div>
+            <ul style="list-style:none; padding:0">
+              <li
+                style="padding:6px 0 6px 16px; position:relative; font-size:13px; color:rgba(255,255,255,.75); border-bottom:1px solid rgba(255,255,255,.1)">
+                <span style="position:absolute;left:0;color:#ffb3b8">→</span> Brief interne à l'équipe la veille (5 min
+                en réunion courte)</li>
+              <li
+                style="padding:6px 0 6px 16px; position:relative; font-size:13px; color:rgba(255,255,255,.75); border-bottom:1px solid rgba(255,255,255,.1)">
+                <span style="position:absolute;left:0;color:#ffb3b8">→</span> Badge visiteur + accueil à l'entrée dès
+                7h20</li>
+              <li
+                style="padding:6px 0 6px 16px; position:relative; font-size:13px; color:rgba(255,255,255,.75); border-bottom:1px solid rgba(255,255,255,.1)">
+                <span style="position:absolute;left:0;color:#ffb3b8">→</span> Carnet de bord AE remis le matin (avec le
+                brief du défi)</li>
+              <li
+                style="padding:6px 0 6px 16px; position:relative; font-size:13px; color:rgba(255,255,255,.75); border-bottom:1px solid rgba(255,255,255,.1)">
+                <span style="position:absolute;left:0;color:#ffb3b8">→</span> Invitation déjeuner avec l'équipe
+                organisée à l'avance</li>
+              <li style="padding:6px 0 6px 16px; position:relative; font-size:13px; color:rgba(255,255,255,.75)"><span
+                  style="position:absolute;left:0;color:#ffb3b8">→</span> Fiche récap de l'offre à remettre en fin de
+                journée avec lien SE</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================= 6. FICHE RETOUR ============================= -->
+    <div class="section" id="retour">
+      <div class="section-header">
+        <div class="section-badge badge-red">Section 6</div>
+        <div class="section-title">Fiche de retour candidat</div>
+        <div class="section-intro">À remplir par le candidat en fin de journée (16h15) avant de partir. Cette fiche
+          reste confidentielle entre le candidat et l'AE. Elle sert aussi à améliorer le dispositif d'immersion au fil
+          des sessions.</div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-head">
+          <div class="fiche-head-title">Fiche de retour — Journée immersion Agence Entreprises</div>
+          <div class="fiche-head-sub">OPT-NC · À remplir avant de partir · Confidentiel</div>
+        </div>
+        <div class="fiche-body" id="ficheBody">
+          <div class="fiche-grid">
+            <div class="fiche-field">
+              <div class="fiche-label">Ton prénom (optionnel)</div>
+              <input class="fiche-input" type="text" placeholder="Prénom…" style="min-height:40px; resize:none">
+            </div>
+            <div class="fiche-field">
+              <div class="fiche-label">Date de ta journée immersion</div>
+              <input class="fiche-input" type="date" style="min-height:40px; resize:none">
+            </div>
+          </div>
+
+          <div class="fiche-field">
+            <div class="fiche-label">Note globale sur ta journée</div>
+            <div class="fiche-stars" id="stars">
+              <span class="fiche-star" onclick="setStar(1)">★</span>
+              <span class="fiche-star" onclick="setStar(2)">★</span>
+              <span class="fiche-star" onclick="setStar(3)">★</span>
+              <span class="fiche-star" onclick="setStar(4)">★</span>
+              <span class="fiche-star" onclick="setStar(5)">★</span>
+            </div>
+          </div>
+
+          <div class="fiche-field">
+            <div class="fiche-label">Ce que tu as aimé dans la journée</div>
+            <textarea class="fiche-input" placeholder="Les moments, les échanges, les découvertes qui t'ont marqué·e…"
+              rows="3"></textarea>
+          </div>
+
+          <div class="fiche-field">
+            <div class="fiche-label">Ce qui t'a surpris — en bien ou en moins bien</div>
+            <textarea class="fiche-input" placeholder="Ce que tu n'attendais pas du poste ou du service…"
+              rows="3"></textarea>
+          </div>
+
+          <div class="fiche-field">
+            <div class="fiche-label">Ce que tu ferais différemment si tu étais déjà en poste</div>
+            <textarea class="fiche-input" placeholder="Un regard frais — tes idées ou observations constructives…"
+              rows="3"></textarea>
+          </div>
+
+          <div class="fiche-field">
+            <div class="fiche-label">Suite à cette journée, tu penses candidater ?</div>
+            <div class="fiche-oui-non">
+              <div class="fiche-choice" onclick="toggleChoice(this, 'yn')">Oui, c'est décidé</div>
+              <div class="fiche-choice" onclick="toggleChoice(this, 'yn')">J'y réfléchis encore</div>
+              <div class="fiche-choice" onclick="toggleChoice(this, 'yn')">Probablement pas</div>
+            </div>
+          </div>
+
+          <div class="fiche-field">
+            <div class="fiche-label">Un conseil pour améliorer cette journée immersion ?</div>
+            <textarea class="fiche-input"
+              placeholder="Pour que les prochains candidats vivent une meilleure expérience…" rows="2"></textarea>
+          </div>
+
+          <div class="fiche-field">
+            <div class="fiche-label">Tu autorises l'AE à utiliser un extrait anonymisé de tes retours pour améliorer le
+              dispositif ?</div>
+            <div class="fiche-oui-non">
+              <div class="fiche-choice" onclick="toggleChoice(this, 'auth')">Oui, avec plaisir</div>
+              <div class="fiche-choice" onclick="toggleChoice(this, 'auth')">Non, je préfère pas</div>
+            </div>
+          </div>
+
+          <button class="fiche-submit" onclick="submitFiche()">Valider et remettre ma fiche →</button>
+        </div>
+        <div class="fiche-thanks" id="ficheThank">
+          <div class="fiche-thanks-icon">🙌</div>
+          <div class="fiche-thanks-title">Merci pour ta journée et tes retours !</div>
+          <div class="fiche-thanks-sub">
+            Ton avis nous aide à améliorer ce dispositif pour les prochains candidats.<br><br>
+            Si tu décides de candidater, pense à le faire via le <strong>Service Emploi de la Province Sud</strong> —
+            référence <strong>OF 2026-03-482</strong>.<br><br>
+            L'équipe de l'Agence Entreprises est heureuse de t'avoir accueilli·e aujourd'hui. 👋
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+
+  <button class="print-btn" onclick="window.print()">🖨 Imprimer / Exporter PDF</button>
+
+  <script>
+    function showTab(id, el) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleCheck(el) {
+      el.classList.toggle('checked');
+    }
+
+    let starVal = 0;
+    function setStar(n) {
+      starVal = n;
+      document.querySelectorAll('.fiche-star').forEach((s, i) => s.classList.toggle('on', i < n));
+    }
+
+    const choiceGroups = {};
+    function toggleChoice(el, group) {
+      const siblings = el.parentElement.querySelectorAll('.fiche-choice');
+      siblings.forEach(s => s.classList.remove('on'));
+      el.classList.add('on');
+    }
+
+    function submitFiche() {
+      document.getElementById('ficheBody').style.display = 'none';
+      document.getElementById('ficheThank').style.display = 'block';
+    }
+  </script>
+</body>
+
+</html>
