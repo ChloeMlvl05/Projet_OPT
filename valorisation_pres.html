@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valorisation Poste AE — OPT-NC · Draft V1</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #F5F4F0;
+      color: #1A1A1A;
+    }
+
+    .header {
+      background: #D0021B;
+      color: #fff;
+      padding: 28px 40px;
+    }
+
+    .header-eyebrow {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .7;
+      margin-bottom: 8px;
+    }
+
+    .header-title {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .header-sub {
+      font-size: 14px;
+      opacity: .75;
+    }
+
+    .tabs {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      padding: 0 40px;
+    }
+
+    .tab {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      color: #777;
+      white-space: nowrap;
+      transition: all .15s;
+    }
+
+    .tab.active {
+      color: #D0021B;
+      border-bottom-color: #D0021B;
+    }
+
+    .tab:hover:not(.active) {
+      color: #333;
+    }
+
+    .main {
+      padding: 32px 40px;
+      max-width: 960px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      background: #FDECEA;
+      color: #A0001A;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.65;
+      margin-bottom: 28px;
+      max-width: 680px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media(max-width:680px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 24px;
+      border: 1px solid #ebebeb;
+      margin-bottom: 16px;
+    }
+
+    .card-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .card-body {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* ===== JOB CARD ===== */
+    .job-card {
+      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+      border-radius: 20px;
+      padding: 28px;
+      color: #fff;
+      max-width: 340px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .job-card::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(208, 2, 27, .2);
+    }
+
+    .jc-tag {
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      margin-bottom: 14px;
+    }
+
+    .jc-role {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .jc-dept {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .55);
+      margin-bottom: 18px;
+    }
+
+    .jc-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, .1);
+      margin-bottom: 16px;
+    }
+
+    .jc-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .jc-stat-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: rgba(255, 255, 255, .4);
+      margin-bottom: 3px;
+    }
+
+    .jc-stat-value {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .jc-powers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .jc-power {
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .1);
+      color: rgba(255, 255, 255, .8);
+      border: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    .jc-power.hot {
+      background: rgba(208, 2, 27, .4);
+      border-color: rgba(208, 2, 27, .5);
+      color: #ffb3b8;
+    }
+
+    .jc-xp-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: rgba(255, 255, 255, .4);
+      margin-bottom: 6px;
+    }
+
+    .jc-bar {
+      background: rgba(255, 255, 255, .12);
+      border-radius: 4px;
+      height: 5px;
+      margin-bottom: 14px;
+    }
+
+    .jc-fill {
+      height: 5px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #D0021B, #FF6B7A);
+      width: 82%;
+    }
+
+    .jc-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .jc-ref {
+      font-size: 9px;
+      color: rgba(255, 255, 255, .25);
+    }
+
+    .jc-rarity {
+      font-size: 9px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: rgba(208, 2, 27, .3);
+      color: #ffb3b8;
+    }
+
+    /* ===== COPIER BLOCK ===== */
+    .copy-block {
+      background: #F8F8F6;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.75;
+      position: relative;
+      white-space: pre-wrap;
+      margin-top: 8px;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #ddd;
+      color: #888;
+      transition: all .15s;
+    }
+
+    .copy-btn:hover {
+      border-color: #D0021B;
+      color: #D0021B;
+    }
+
+    /* ===== GENIALLY ===== */
+    .genially-screen {
+      background: #F0EEE8;
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid #e0ddd8;
+      margin-bottom: 20px;
+    }
+
+    .gen-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+      align-items: center;
+    }
+
+    .gen-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .gen-url {
+      font-size: 11px;
+      color: #999;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 6px;
+      padding: 3px 12px;
+      flex: 1;
+    }
+
+    .gen-zones {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .gen-zone {
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .gen-zone-icon {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .gen-zone-label {
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .gen-zone-sub {
+      font-size: 10px;
+      opacity: .7;
+    }
+
+    .struct-block {
+      border-left: 3px solid #D0021B;
+      padding-left: 16px;
+      margin-bottom: 16px;
+    }
+
+    .sb-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .sb-desc {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    .sb-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .sb-tag {
+      background: #F0EEE8;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: #666;
+    }
+
+    /* ===== AFFICHE IMMERSION ===== */
+    .affiche {
+      background: #D0021B;
+      border-radius: 20px;
+      padding: 32px 28px;
+      color: #fff;
+      max-width: 360px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .affiche-bg {
+      position: absolute;
+      bottom: -20px;
+      right: -10px;
+      font-size: 100px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .05);
+      pointer-events: none;
+    }
+
+    .af-eyebrow {
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .55);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .af-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: rgba(255, 255, 255, .35);
+    }
+
+    .af-headline {
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .af-headline em {
+      color: #ffcccc;
+      font-style: normal;
+    }
+
+    .af-sub {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .72);
+      margin-bottom: 26px;
+      line-height: 1.6;
+    }
+
+    .af-box {
+      background: rgba(255, 255, 255, .15);
+      border-radius: 14px;
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      margin-bottom: 22px;
+    }
+
+    .af-box-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(255, 255, 255, .55);
+      margin-bottom: 6px;
+    }
+
+    .af-box-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .af-cta {
+      display: inline-block;
+      background: #fff;
+      color: #D0021B;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 11px 22px;
+      border-radius: 30px;
+    }
+
+    .af-footer {
+      margin-top: 18px;
+      font-size: 10px;
+      color: rgba(255, 255, 255, .35);
+    }
+
+    /* ===== QUIZ ===== */
+    .quiz-frame {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid #ebebeb;
+      overflow: hidden;
+    }
+
+    .quiz-head {
+      background: #D0021B;
+      padding: 18px 22px;
+      color: #fff;
+    }
+
+    .qh-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .qh-sub {
+      font-size: 12px;
+      opacity: .72;
+    }
+
+    .quiz-prog {
+      background: #F8F6F0;
+      padding: 10px 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qp-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .qp-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ddd;
+      transition: background .2s;
+    }
+
+    .qp-dot.done {
+      background: #D0021B;
+    }
+
+    .qp-dot.cur {
+      background: #E8303A;
+      box-shadow: 0 0 0 3px rgba(208, 2, 27, .2);
+    }
+
+    .qp-num {
+      font-size: 11px;
+      color: #999;
+      margin-left: auto;
+    }
+
+    .quiz-body {
+      padding: 22px;
+    }
+
+    .quiz-q {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+
+    .quiz-opts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-opt {
+      padding: 13px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid #e5e5e5;
+      font-size: 13px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all .15s;
+    }
+
+    .quiz-opt:hover {
+      border-color: #D0021B;
+      background: #FDECEA;
+      color: #A0001A;
+    }
+
+    .quiz-opt.sel {
+      border-color: #D0021B;
+      background: #FDECEA;
+      color: #A0001A;
+    }
+
+    .opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1.5px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 22px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .qbtn {
+      padding: 10px 22px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all .15s;
+    }
+
+    .qbtn.primary {
+      background: #D0021B;
+      color: #fff;
+    }
+
+    .qbtn.primary:hover {
+      background: #B0011A;
+    }
+
+    .qbtn.ghost {
+      background: transparent;
+      border: 1px solid #ddd;
+      color: #888;
+    }
+
+    .qbtn.ghost:hover {
+      border-color: #999;
+      color: #444;
+    }
+
+    .quiz-result {
+      display: none;
+      padding: 32px 22px;
+      text-align: center;
+    }
+
+    .qr-icon {
+      font-size: 44px;
+      margin-bottom: 12px;
+    }
+
+    .qr-title {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .qr-sub {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 22px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .qr-cta {
+      background: #D0021B;
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* ===== INFOGRAPHIE ===== */
+    .infog {
+      background: #fff;
+      border-radius: 16px;
+      padding: 26px;
+      max-width: 480px;
+      border: 1px solid #ebebeb;
+    }
+
+    .infog-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: 20px;
+    }
+
+    .infog-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: #D0021B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .infog-logo-txt {
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .infog-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .infog-sub {
+      font-size: 11px;
+      color: #999;
+    }
+
+    .infog-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .infog-stat {
+      background: #F8F6F0;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .infog-num {
+      font-size: 30px;
+      font-weight: 500;
+      color: #D0021B;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .infog-lbl {
+      font-size: 11px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .infog-missions-title {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .infog-mission {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f4f4f4;
+    }
+
+    .infog-mission:last-child {
+      border-bottom: none;
+    }
+
+    .infog-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #D0021B;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .infog-mission-txt {
+      font-size: 12px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .infog-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid #f0f0f0;
+      margin-top: 10px;
+    }
+
+    .infog-footer-txt {
+      font-size: 10px;
+      color: #bbb;
+    }
+
+    .infog-pill {
+      background: #FDECEA;
+      color: #A0001A;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    /* ===== CAROUSEL ===== */
+    .carousel-slide {
+      display: none;
+    }
+
+    .carousel-slide.on {
+      display: block;
+    }
+
+    .csl-slide {
+      background: #fff;
+      border-radius: 14px;
+      padding: 26px;
+      border: 1px solid #ebebeb;
+      margin-bottom: 14px;
+    }
+
+    .csl-slide-num {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #bbb;
+      margin-bottom: 12px;
+    }
+
+    .csl-myth {
+      font-size: 20px;
+      font-weight: 500;
+      color: #999;
+      text-decoration: line-through;
+      margin-bottom: 18px;
+      line-height: 1.3;
+      font-style: italic;
+    }
+
+    .csl-truth-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #007A3D;
+      margin-bottom: 8px;
+    }
+
+    .csl-truth {
+      font-size: 14px;
+      color: #222;
+      line-height: 1.75;
+    }
+
+    .csl-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .csl-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid #e0e0e0;
+      background: #fff;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all .15s;
+    }
+
+    .csl-btn:hover {
+      border-color: #D0021B;
+      color: #D0021B;
+    }
+
+    .csl-counter {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .csl-dots {
+      display: flex;
+      gap: 6px;
+      margin-left: auto;
+    }
+
+    .csl-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ddd;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    .csl-dot.on {
+      background: #D0021B;
+    }
+
+    .note {
+      background: #FFFBF0;
+      border-left: 3px solid #EF9F27;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #7A5300;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="header-eyebrow">OPT-NC — Draft v1 · Confidentiel interne</div>
+    <div class="header-title">Valorisation du poste — Agence Entreprises OPT-NC</div>
+    <div class="header-sub">6 exemples de formats de communication · Diffusion Viva Engage + supports internes · À valider avant
+      production finale</div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="show('s2',this)"> Job Card</div>
+    <div class="tab" onclick="show('s3',this)"> Genially</div>
+    <div class="tab" onclick="show('s5',this)"> Affiche immersion</div>
+    <div class="tab" onclick="show('s6',this)"> Quiz profil</div>
+    <div class="tab" onclick="show('s7',this)"> Infographie</div>
+    <div class="tab" onclick="show('s9',this)"> Idées reçues</div>
+  </div>
+
+  <div class="main">
+
+    <!-- ===================== IDÉE 2 ===================== -->
+    <div class="section active" id="s2">
+      <div class="badge"> Job Card</div>
+      <div class="section-title">La carte de poste façon "trading card"</div>
+      <div class="section-sub">Un visuel animé au format carte collector — compétences = pouvoirs, missions = quêtes,
+        poste stratégique = rareté. À produire dans Canva (export PNG ou courte vidéo de reveal). Partageable
+        directement sur Viva Engage.</div>
+
+      <div style="display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start;">
+        <div>
+          <div class="job-card">
+            <div class="jc-tag">OPT-NC · Direction des Télécommunications</div>
+            <div class="jc-role">Assistant Commercial<br>Clientèle Entreprises</div>
+            <div class="jc-dept">Agence Entreprises · Nouméa</div>
+            <div class="jc-divider"></div>
+            <div class="jc-stats">
+              <div>
+                <div class="jc-stat-label">Contrat</div>
+                <div class="jc-stat-value">9 mois</div>
+              </div>
+              <div>
+                <div class="jc-stat-label">Niveau</div>
+                <div class="jc-stat-value">BAC</div>
+              </div>
+              <div>
+                <div class="jc-stat-label">Poste</div>
+                <div class="jc-stat-value">×1</div>
+              </div>
+            </div>
+            <div class="jc-stat-label" style="margin-bottom:8px">Compétences clés</div>
+            <div class="jc-powers">
+              <span class="jc-power hot">Relation client</span>
+              <span class="jc-power hot">Commercial B2B</span>
+              <span class="jc-power">Back-office</span>
+              <span class="jc-power">Bureautique</span>
+              <span class="jc-power">Télécom</span>
+            </div>
+            <div class="jc-stat-label" style="margin-bottom:6px">Niveau d'impact à l'OPT-NC</div>
+            <div class="jc-bar">
+              <div class="jc-fill"></div>
+            </div>
+            <div class="jc-bottom">
+              <div class="jc-ref">OF 2026-03-482</div>
+              <div class="jc-rarity">★ Poste stratégique</div>
+            </div>
+          </div>
+          <p style="font-size:11px; color:#999; margin-top:10px; max-width:340px; line-height:1.5">Aperçu maquette. À
+            reproduire dans Canva avec charte OPT + export PNG ou vidéo reveal 2s.</p>
+        </div>
+
+        <div style="flex:1; min-width:240px;">
+          <div class="card">
+            <div class="card-label">Brief production Canva</div>
+            <div class="card-title">Spécifications</div>
+            <div class="card-body">
+              <b>Dimensions :</b> 1080×1350px (portrait, optimal Viva Engage).<br><br>
+              <b>Visuel :</b> Fond sombre marine/anthracite, typo blanche, accent rouge OPT-NC (#D0021B). Badge "Poste
+              stratégique" en bas à droite. Barre de niveau animée.<br><br>
+              <b>Animation optionnelle :</b> Fade + slide de bas en haut, 1,5 sec. Export MP4 ou GIF court pour post
+              Viva Engage.<br><br>
+              <b>Éléments à garder :</b> référence offre, mention "×1 poste", permis B requis.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-label">Texte post Viva Engage</div>
+            <div class="card-body">
+              <div class="copy-block">🃏 Nouvelle carte dans notre collection RH !
+
+                L'Agence Entreprises de l'OPT recrute un·e <b>Assistant·e Commercial·e Clientèle Entreprises</b> — et ce
+                poste mérite vraiment qu'on en parle.
+
+                Position stratégique au cœur de la relation B2B de l'OPT-NC. Un seul poste disponible, à pourvoir dès
+                maintenant.
+
+                📋 Contrat 9 mois · BAC · Permis B
+                Candidatures exclusivement via le Service Emploi — OF 2026-03-482<button class="copy-btn"
+                  onclick="copyText(this)">Copier</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== IDÉE 3 ===================== -->
+    <div class="section" id="s3">
+      <div class="badge">Genially interactif</div>
+      <div class="section-title">Explore l'Agence Entreprises en 3 clics</div>
+      <div class="section-sub">Une présentation Genially à navigation non linéaire — l'utilisateur explore le poste à
+        son rythme. Zéro code, partage par lien ou QR code. Durée de consultation estimée : 3 à 5 min.</div>
+
+      <div class="genially-screen">
+        <div class="gen-bar">
+          <div class="gen-dot" style="background:#FF5F57"></div>
+          <div class="gen-dot" style="background:#FEBC2E"></div>
+          <div class="gen-dot" style="background:#28C840"></div>
+          <div class="gen-url">genial.ly/opt-agence-entreprises ← lien à créer</div>
+        </div>
+        <div style="background:#fff; border-radius:10px; padding:16px; border:1px solid #ebebeb;">
+          <div style="font-size:13px; font-weight:500; margin-bottom:14px; color:#333;">Slide d'accueil — "Et si ton
+            prochain poste était au cœur du réseau ?"</div>
+          <div class="gen-zones">
+            <div class="gen-zone" style="background:#FDECEA; border-color:#F5B3BA">
+              <div class="gen-zone-icon">💼</div>
+              <div class="gen-zone-label" style="color:#A0001A">Mes missions</div>
+              <div class="gen-zone-sub" style="color:#C0303A">Cliquez pour explorer</div>
+            </div>
+            <div class="gen-zone" style="background:#EAF3DE; border-color:#B0D880">
+              <div class="gen-zone-icon">👥</div>
+              <div class="gen-zone-label" style="color:#2A5A10">L'équipe</div>
+              <div class="gen-zone-sub" style="color:#4A8A20">Cliquez pour explorer</div>
+            </div>
+            <div class="gen-zone" style="background:#E6F1FB; border-color:#85B7EB">
+              <div class="gen-zone-icon">📅</div>
+              <div class="gen-zone-label" style="color:#0C447C">Ma journée type</div>
+              <div class="gen-zone-sub" style="color:#185FA5">Cliquez pour explorer</div>
+            </div>
+            <div class="gen-zone" style="background:#FAEEDA; border-color:#EF9F27">
+              <div class="gen-zone-icon">🏢</div>
+              <div class="gen-zone-label" style="color:#633806">L'OPT-NC, qui ?</div>
+              <div class="gen-zone-sub" style="color:#854F0B">Cliquez pour explorer</div>
+            </div>
+            <div class="gen-zone" style="background:#EEEDFE; border-color:#AFA9EC">
+              <div class="gen-zone-icon">✨</div>
+              <div class="gen-zone-label" style="color:#26215C">Le + du poste</div>
+              <div class="gen-zone-sub" style="color:#3C3489">Cliquez pour explorer</div>
+            </div>
+            <div class="gen-zone" style="background:#D0021B; border-color:#D0021B">
+              <div class="gen-zone-icon">🎯</div>
+              <div class="gen-zone-label" style="color:#fff">Candidater</div>
+              <div class="gen-zone-sub" style="color:rgba(255,255,255,.8)">Offre + lien SE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:14px; font-weight:500; margin-bottom:16px;">Structure détaillée — 6 slides</p>
+
+      <div class="struct-block">
+        <div class="sb-title">Slide 1 · Accueil</div>
+        <div class="sb-desc">Titre animé accrocheur : <i>"Et si ton prochain poste était au cœur du réseau ?"</i> + 6
+          zones interactives cliquables (voir maquette). Fond blanc ou gris clair, logo OPT-NC en haut.</div>
+        <div class="sb-tags"><span class="sb-tag">Titre animé</span><span class="sb-tag">6 zones cliquables</span><span
+            class="sb-tag">Logo OPT-NC</span></div>
+      </div>
+      <div class="struct-block">
+        <div class="sb-title">Slide 2 · Mes missions</div>
+        <div class="sb-desc">Timeline verticale ou icônes interactives listant les 5 missions principales du poste.
+          Chaque icône déclenche un popover de 2 lignes expliquant la mission en termes concrets.</div>
+        <div class="sb-tags"><span class="sb-tag">Timeline</span><span class="sb-tag">5 popovers</span><span
+            class="sb-tag">Icônes Flaticon</span></div>
+      </div>
+      <div class="struct-block">
+        <div class="sb-title">Slide 3 · L'équipe</div>
+        <div class="sb-desc">Photos ou illustrations de l'équipe AE avec une citation courte et authentique par
+          personne. Ton chaleureux, ambiance de service réel. Si photos indisponibles : illustrations style avatar.
+        </div>
+        <div class="sb-tags"><span class="sb-tag">Portraits équipe</span><span class="sb-tag">Citations
+            authentiques</span></div>
+      </div>
+      <div class="struct-block">
+        <div class="sb-title">Slide 4 · Ma journée type</div>
+        <div class="sb-desc">Frise horaire de 8h00 à 17h00 avec 5 étapes cliquables. Insiste sur la diversité réelle du
+          poste — jamais deux journées identiques. Rend le poste concret et vivant.</div>
+        <div class="sb-tags"><span class="sb-tag">Frise horaire</span><span class="sb-tag">5 étapes interactives</span>
+        </div>
+      </div>
+      <div class="struct-block">
+        <div class="sb-title">Slide 5 · Le + du poste</div>
+        <div class="sb-desc">3 arguments forts mis en scène visuellement : (1) position stratégique à l'OPT-NC, (2)
+          diversité des missions, (3) mesure d'immersion disponible avant candidature. CTA vers le contact immersion.
+        </div>
+        <div class="sb-tags"><span class="sb-tag">3 blocs visuels</span><span class="sb-tag">CTA immersion</span><span
+            class="sb-tag">Argument différenciant</span></div>
+      </div>
+      <div class="struct-block">
+        <div class="sb-title">Slide 6 · Candidater</div>
+        <div class="sb-desc">Récap complet : intitulé, référence OF 2026-03-482, lien Service Emploi Province Sud, QR
+          code, contact pour organiser l'immersion. Instructions candidature bien visibles.</div>
+        <div class="sb-tags"><span class="sb-tag">QR code</span><span class="sb-tag">Lien SE Province Sud</span><span
+            class="sb-tag">Contact immersion</span></div>
+      </div>
+
+      <div class="note">⚠️ Note de production : Template Genially recommandé = "Creative" ou "Minimal" (fond blanc,
+        personnalisable aux couleurs OPT). Durée de création estimée : 3 à 4h avec textes fournis. Partage : lien public
+        à poster sur Viva Engage avec miniature personnalisée.</div>
+    </div>
+
+    <!-- ===================== IDÉE 5 ===================== -->
+    <div class="section" id="s5">
+      <div class="badge">Affiche immersion</div>
+      <div class="section-title">L'immersion comme argument central</div>
+      <div class="section-sub">Un visuel fort qui met explicitement en avant la mesure d'immersion. L'objectif : lever
+        la peur de l'inconnu, premier frein à la candidature. Format affiche numérique + post Viva Engage.</div>
+
+      <div style="display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start;">
+        <div>
+          <div class="affiche">
+            <div class="affiche-bg">AE</div>
+            <div class="af-eyebrow">OPT-NC · Agence Entreprises</div>
+            <div class="af-headline">Tu veux savoir<br>à quoi ça<br><em>ressemble vraiment ?</em></div>
+            <div class="af-sub">Viens passer une demi-journée avec nous avant de candidater.</div>
+            <div class="af-box">
+              <div class="af-box-label">La mesure immersion</div>
+              <div class="af-box-text">½ journée ou une journée complète au sein de l'Agence Entreprises — pour voir le
+                poste de l'intérieur.</div>
+            </div>
+            <div class="af-cta">Je veux en savoir plus →</div>
+            <div class="af-footer">Offre OF 2026-03-482 · Candidatures via le Service Emploi uniquement</div>
+          </div>
+          <p style="font-size:11px; color:#999; margin-top:10px; max-width:360px; line-height:1.5">Maquette de
+            référence. À produire dans Canva ou Illustrator.<br>Format : 1080×1350px (Viva Engage) + 1920×1080px (écrans
+            internes OPT).</p>
+        </div>
+
+        <div style="flex:1; min-width:240px;">
+          <div class="card">
+            <div class="card-label">Post Viva Engage — version courte</div>
+            <div class="card-body">
+              <div class="copy-block">👀 Curieux·se mais pas encore sûr·e ?
+
+                L'Agence Entreprises de l'OPT te propose quelque chose d'assez rare : venir passer une demi-journée ou
+                une journée complète dans le service, au poste concerné, pour te faire ta propre idée — avant de
+                candidater.
+
+                Parce qu'un poste, ça se vit avant de se décider.
+
+                📋 Assistant·e Commercial·e Clientèle Entreprises
+                📍 Agence Entreprises, 9 rue Galliéni, Nouméa
+                📅 Contrat 9 mois · BAC · À pourvoir dès que possible
+
+                Candidatures via le Service Emploi — OF 2026-03-482
+                Pour l'immersion : [CONTACT À COMPLÉTER]<button class="copy-btn"
+                  onclick="copyText(this)">Copier</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-label">Post Viva Engage — version longue</div>
+            <div class="card-body">
+              <div class="copy-block">🏢 L'Agence Entreprises, tu connais vraiment ?
+
+                C'est l'une des positions stratégiques de l'OPT-NC. Le service qui est en contact direct avec les
+                entreprises de Nouvelle-Calédonie — qui gère leurs besoins télécom, qui représente l'image de l'OPT au
+                quotidien.
+
+                Et en ce moment, l'AE cherche un·e Assistant·e Commercial·e Clientèle Entreprises pour rejoindre
+                l'équipe.
+
+                Ce qui rend cette offre différente ? Tu peux venir voir avant de décider.
+
+                Une demi-journée, une journée entière dans le service, au poste concerné. Pour rencontrer l'équipe,
+                comprendre les missions, te faire ta propre idée — avant de prendre ta décision.
+
+                Profil recherché : BAC, expérience en secrétariat ou commerce, sens du contact, organisation.
+
+                📋 OF 2026-03-482 · Candidatures via le SE Province Sud uniquement
+                Pour organiser une immersion : [CONTACT À COMPLÉTER]<button class="copy-btn"
+                  onclick="copyText(this)">Copier</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== IDÉE 6 ===================== -->
+    <div class="section" id="s6">
+      <div class="badge">Quiz profil interactif</div>
+      <div class="section-title">Es-tu fait·e pour l'Agence Entreprises ?</div>
+      <div class="section-sub">5 questions courtes et concrètes, à intégrer dans Genially (bloc "Quiz interactif").
+        Résultat personnalisé selon le score, avec lien vers l'offre. Voici la version de test fonctionnelle — les 5
+        questions sont prêtes à copier-coller dans Genially.</div>
+
+      <div class="quiz-frame">
+        <div class="quiz-head">
+          <div class="qh-title">Es-tu fait·e pour l'Agence Entreprises ?</div>
+          <div class="qh-sub">5 questions · 2 minutes · Résultat instantané</div>
+        </div>
+        <div class="quiz-prog">
+          <div class="qp-dots" id="qdots"></div>
+          <div class="qp-num" id="qnum">Question 1 / 5</div>
+        </div>
+        <div id="qbody">
+          <div class="quiz-body">
+            <div class="quiz-q" id="qquestion"></div>
+            <div class="quiz-opts" id="qopts"></div>
+          </div>
+          <div class="quiz-nav">
+            <button class="qbtn ghost" onclick="prevQ()">← Précédent</button>
+            <button class="qbtn primary" id="qnextbtn" onclick="nextQ()">Suivant →</button>
+          </div>
+        </div>
+        <div class="quiz-result" id="qresult">
+          <div class="qr-icon" id="qricon">🎯</div>
+          <div class="qr-title" id="qrtitle"></div>
+          <div class="qr-sub" id="qrsub"></div>
+          <button class="qr-cta" onclick="resetQuiz()">Recommencer le quiz</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px">
+        <div class="card-label">Notes d'intégration Genially</div>
+        <div class="card-body">
+          Utiliser le bloc "Quiz interactif" de Genially. Mode scoring : 1 point par bonne réponse.<br><br>
+          <b>Résultat 5/5 ou 4/5 :</b> "Tu as le profil AE !" + CTA direct vers lien SE Province Sud.<br>
+          <b>Résultat 2/5 ou 3/5 :</b> "Tu t'en approches !" + mention de la mesure d'immersion.<br>
+          <b>Résultat 0/5 ou 1/5 :</b> Réorientation douce, mention que la curiosité est déjà un bon point de
+          départ.<br><br>
+          Durée de création estimée dans Genially : 1h30.
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== IDÉE 7 ===================== -->
+    <div class="section" id="s7">
+      <div class="badge">Infographie de prestige</div>
+      <div class="section-title">L'Agence Entreprises en chiffres</div>
+      <div class="section-sub">Un visuel épuré qui donne du poids et du sens au poste. Message central : ce n'est pas un
+        poste banal, c'est un poste qui compte. À adapter avec les vraies données internes OPT-NC si disponibles.</div>
+
+      <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
+        <div class="infog">
+          <div class="infog-head">
+            <div class="infog-logo">
+              <div class="infog-logo-txt">OPT<br>NC</div>
+            </div>
+            <div>
+              <div class="infog-title">L'Agence Entreprises en chiffres</div>
+              <div class="infog-sub">Direction des Télécommunications · OPT-NC</div>
+            </div>
+          </div>
+          <div class="infog-stats">
+            <div class="infog-stat">
+              <div class="infog-num">1er</div>
+              <div class="infog-lbl">point de contact télécom pour les entreprises calédoniennes</div>
+            </div>
+            <div class="infog-stat">
+              <div class="infog-num">B2B</div>
+              <div class="infog-lbl">PME, grands comptes, institutions — un portefeuille clients varié</div>
+            </div>
+            <div class="infog-stat">
+              <div class="infog-num">100%</div>
+              <div class="infog-lbl">des demandes clients gérées en direct, au plus près des besoins réels</div>
+            </div>
+            <div class="infog-stat">
+              <div class="infog-num">×1</div>
+              <div class="infog-lbl">poste à pourvoir — une opportunité rare, à saisir maintenant</div>
+            </div>
+          </div>
+          <div class="infog-missions-title">Ce que tu feras au quotidien</div>
+          <div class="infog-mission">
+            <div class="infog-dot"></div>
+            <div class="infog-mission-txt">Accueillir et conseiller les clients entreprises (physique & téléphone)</div>
+          </div>
+          <div class="infog-mission">
+            <div class="infog-dot"></div>
+            <div class="infog-mission-txt">Gérer les demandes et traiter les courriers en back-office</div>
+          </div>
+          <div class="infog-mission">
+            <div class="infog-dot"></div>
+            <div class="infog-mission-txt">Participer aux actions commerciales et opérations marketing</div>
+          </div>
+          <div class="infog-mission">
+            <div class="infog-dot"></div>
+            <div class="infog-mission-txt">Contribuer à l'amélioration de la qualité de service OPT-NC</div>
+          </div>
+          <div class="infog-footer">
+            <div class="infog-footer-txt">OF 2026-03-482 · Candidatures via le Service Emploi uniquement</div>
+            <div class="infog-pill">Postuler →</div>
+          </div>
+        </div>
+
+        <div style="flex:1; min-width:240px;">
+          <div class="card">
+            <div class="card-label">Post Viva Engage</div>
+            <div class="card-body">
+              <div class="copy-block">📊 L'Agence Entreprises de l'OPT-NC en quelques chiffres — et pourquoi ce poste
+                compte vraiment.
+
+                Premier point de contact télécom pour les entreprises de Nouvelle-Calédonie. Un portefeuille clients
+                varié : PME, grands comptes, institutions. Des missions qui vont de l'accueil au back-office en passant
+                par les actions commerciales terrain.
+
+                Et là, un poste se libère. Un seul. Contrat 9 mois, ouvert dès maintenant.
+
+                📋 Assistant·e Commercial·e Clientèle Entreprises · OF 2026-03-482
+                Candidatures exclusivement via le Service Emploi de la Province Sud.<button class="copy-btn"
+                  onclick="copyText(this)">Copier</button></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-label">Brief Canva / Illustrator</div>
+            <div class="card-body">
+              Format : 1080×1350px portrait. Chiffres en grande typo rouge OPT (#D0021B). Fond blanc ou gris très clair
+              (#F8F6F0). Logo OPT-NC en haut à gauche. Grille 2 colonnes pour les 4 stats. Liste des missions avec
+              points rouges. Pied de page avec référence offre + CTA.
+            </div>
+          </div>
+          <div class="note">💡 À enrichir avec de vrais chiffres internes : nombre de clients AE, volume d'appels
+            mensuel, nombre d'entreprises dans le portefeuille. Plus les chiffres sont réels, plus l'impact est fort.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== IDÉE 9 ===================== -->
+    <div class="section" id="s9">
+      <div class="badge">Idées reçues</div>
+      <div class="section-title">5 idées reçues sur le poste — démystification</div>
+      <div class="section-sub">Un carousel de 5 slides "Mythe vs Réalité" à publier en 5 posts espacés sur Viva Engage
+        (1 par jour du lundi au vendredi), ou en un seul carousel. Ton légèrement décalé mais institutionnel.</div>
+
+      <div id="carouselSlides"></div>
+      <div class="csl-nav">
+        <button class="csl-btn" onclick="slide(-1)">←</button>
+        <div class="csl-counter" id="slcounter">1 / 5</div>
+        <div class="csl-dots" id="sldots"></div>
+        <button class="csl-btn" onclick="slide(1)">→</button>
+      </div>
+
+      <div class="card" style="margin-top:20px">
+        <div class="card-label">Post chapeau Viva Engage (lancement de la série)</div>
+        <div class="card-body">
+          <div class="copy-block">💬 On a entendu pas mal d'idées reçues sur l'Agence Entreprises de l'OPT. Il est temps
+            d'y répondre — une par une.
+
+            Cette semaine, on démonte 5 mythes sur le poste d'Assistant·e Commercial·e Clientèle Entreprises. Parce que
+            ce poste mérite qu'on en parle tel qu'il est vraiment.
+
+            Suite au fil 👇<button class="copy-btn" onclick="copyText(this)">Copier</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Notes de production Canva</div>
+        <div class="card-body">
+          Format : 1080×1080px, 1 visuel = 1 mythe. Grande typographie. Fond blanc. Mythe barré en gris clair. Label "LA
+          RÉALITÉ" en vert (#007A3D). Corps de réponse en noir. Accent rouge OPT en décoration. Diffusion : 1 slide/jour
+          ou carousel unique le lundi.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+
+  <script>
+    function show(id, tab) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      tab.classList.add('active');
+    }
+
+    function copyText(btn) {
+      const block = btn.parentElement;
+      const clone = block.cloneNode(true);
+      clone.querySelector('.copy-btn') && clone.querySelector('.copy-btn').remove();
+      const text = clone.innerText.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓ Copié !';
+        setTimeout(() => btn.textContent = 'Copier', 2000);
+      });
+    }
+
+    // ===== QUIZ =====
+    const QS = [
+      {
+        q: "Un client appelle, il est mécontent et son ton monte. Tu…",
+        opts: ["Raccroches poliment et rappelles plus tard", "L'écoutes, reformules sa demande et proposes une solution concrète", "Transfères directement à ton responsable sans essayer", "Attends qu'il se calme sans dire un mot"],
+        good: 1
+      },
+      {
+        q: "Tu gères en parallèle un courrier urgent, deux demandes clients et une action marketing qui arrive. Tu…",
+        opts: ["Traites tout en même temps au risque d'oublier quelque chose", "Priorises selon l'urgence et notes ce qui peut attendre", "Demandes à l'équipe de tout prendre en charge", "Finis le courrier d'abord, quoi qu'il arrive"],
+        good: 1
+      },
+      {
+        q: "Quelle phrase te ressemble le plus au travail ?",
+        opts: ['"Je préfère travailler seul·e et en silence"', '"J\'aime le contact, même quand c\'est compliqué"', '"Je fais le strict minimum demandé"', '"Les clients, c\'est pas vraiment mon truc"'],
+        good: 1
+      },
+      {
+        q: "L'OPT-NC lance une nouvelle offre télécom. Un client veut comprendre les avantages. Tu…",
+        opts: ["Récites la fiche produit mot pour mot", "Adaptes ton explication selon le profil et les besoins du client", "Renvoies vers la brochure sans expliquer davantage", "Attends d'être mieux formé·e avant de répondre"],
+        good: 1
+      },
+      {
+        q: "Pourquoi l'Agence Entreprises est-elle stratégique pour l'OPT-NC ?",
+        opts: ["Elle gère les abonnements résidentiels du grand public", "Elle est le point de contact direct avec les clients professionnels", "Elle s'occupe de la maintenance du réseau télécom", "Je ne sais pas encore — mais je veux découvrir"],
+        good: 1
+      }
+    ];
+
+    let qi = 0, qa = [];
+
+    function buildDots() {
+      const d = document.getElementById('qdots');
+      d.innerHTML = '';
+      QS.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'qp-dot' + (i < qi ? ' done' : i === qi ? ' cur' : '');
+        d.appendChild(dot);
+      });
+      document.getElementById('qnum').textContent = 'Question ' + (qi + 1) + ' / ' + QS.length;
+      document.getElementById('qnextbtn') && (document.getElementById('qnextbtn').textContent = qi === QS.length - 1 ? 'Voir mon résultat →' : 'Suivant →');
+    }
+
+    function renderQ() {
+      const q = QS[qi];
+      document.getElementById('qquestion').textContent = q.q;
+      const opts = document.getElementById('qopts');
+      opts.innerHTML = '';
+      q.opts.forEach((o, i) => {
+        const d = document.createElement('div');
+        d.className = 'quiz-opt' + (qa[qi] === i ? ' sel' : '');
+        d.innerHTML = '<span class="opt-letter">' + String.fromCharCode(65 + i) + '</span>' + o;
+        d.onclick = () => { qa[qi] = i; renderQ(); };
+        opts.appendChild(d);
+      });
+      buildDots();
+    }
+
+    function nextQ() {
+      if (qa[qi] === undefined) return;
+      if (qi === QS.length - 1) { showResult(); return; }
+      qi++; renderQ();
+    }
+    function prevQ() { if (qi > 0) { qi--; renderQ(); } }
+
+    function showResult() {
+      document.getElementById('qbody').style.display = 'none';
+      const res = document.getElementById('qresult');
+      res.style.display = 'block';
+      const score = qa.filter((a, i) => a === QS[i].good).length;
+      let icon, title, sub;
+      if (score >= 4) {
+        icon = '🎯'; title = 'Tu as le profil AE !';
+        sub = 'Ton sens du contact, ton organisation et ta réactivité correspondent exactement à ce que l\'Agence Entreprises recherche.\n\nIl ne reste plus qu\'un pas : candidater via le Service Emploi de la Province Sud, offre OF 2026-03-482.';
+      } else if (score >= 2) {
+        icon = '💡'; title = 'Tu t\'en approches !';
+        sub = 'Quelques réflexes à affiner, mais les bases sont là. La meilleure façon de vérifier si le poste te correspond vraiment ? Viens passer une demi-journée à l\'Agence Entreprises — on a une mesure d\'immersion pour ça.';
+      } else {
+        icon = '🤔'; title = 'Peut-être pas ce poste-là…';
+        sub = 'Pas de souci — l\'important, c\'est de trouver le poste qui te correspond vraiment. Mais si tu es curieux·se de ce que fait l\'AE, la mesure d\'immersion reste ouverte à tous !';
+      }
+      document.getElementById('qricon').textContent = icon;
+      document.getElementById('qrtitle').textContent = title;
+      document.getElementById('qrsub').textContent = sub;
+    }
+
+    function resetQuiz() {
+      qi = 0; qa = [];
+      document.getElementById('qbody').style.display = 'block';
+      document.getElementById('qresult').style.display = 'none';
+      renderQ();
+    }
+
+    renderQ();
+
+    // ===== CAROUSEL =====
+    const SLIDES = [
+      {
+        myth: '"Assistant commercial = juste répondre au téléphone"',
+        truth: 'Faux. À l\'Agence Entreprises, le poste couvre l\'accueil physique et téléphonique, le traitement de courriers en back-office, la gestion des demandes clients, et la participation aux actions marketing et salons. Deux journées ne se ressemblent jamais vraiment.'
+      },
+      {
+        myth: '"C\'est un poste d\'exécution, sans vraie responsabilité"',
+        truth: 'Faux. Tu es en contact direct avec les clients professionnels de l\'OPT-NC — entreprises, PME, institutions. Chaque interaction engage l\'image de l\'OPT. C\'est une vraie responsabilité commerciale, au cœur de la stratégie de l\'entreprise.'
+      },
+      {
+        myth: '"Il faut déjà connaître les produits télécom de l\'OPT pour postuler"',
+        truth: 'Faux. La connaissance des produits et services télécoms fait partie des compétences à acquérir dans le poste — ce n\'est pas un prérequis absolu. Une expérience en secrétariat ou en commerce est suffisante pour candidater.'
+      },
+      {
+        myth: '"L\'Agence Entreprises, c\'est un service secondaire à l\'OPT"',
+        truth: 'Faux. L\'AE est l\'une des positions stratégiques de l\'OPT-NC. C\'est le service qui gère la relation directe avec la clientèle professionnelle — au cœur de la stratégie commerciale et de la réputation télécom de l\'entreprise en Nouvelle-Calédonie.'
+      },
+      {
+        myth: '"On ne peut pas savoir si ce poste nous convient avant de l\'avoir"',
+        truth: 'Faux justement. Une mesure d\'immersion existe : tu peux venir passer une demi-journée ou une journée entière à l\'Agence Entreprises, au poste concerné, pour voir concrètement ce que ça implique — avant de prendre ta décision de candidater.'
+      }
+    ];
+
+    let si = 0;
+
+    function buildCarousel() {
+      const c = document.getElementById('carouselSlides');
+      c.innerHTML = '';
+      SLIDES.forEach((s, i) => {
+        const div = document.createElement('div');
+        div.className = 'carousel-slide' + (i === 0 ? ' on' : '');
+        div.innerHTML = `<div class="csl-slide">
+      <div class="csl-slide-num">Idée reçue ${i + 1} / ${SLIDES.length}</div>
+      <div class="csl-myth">${s.myth}</div>
+      <div class="csl-truth-label">✓ La réalité</div>
+      <div class="csl-truth">${s.truth}</div>
+    </div>`;
+        c.appendChild(div);
+      });
+      const dots = document.getElementById('sldots');
+      dots.innerHTML = '';
+      SLIDES.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'csl-dot' + (i === 0 ? ' on' : '');
+        d.onclick = () => goSlide(i);
+        dots.appendChild(d);
+      });
+    }
+
+    function slide(dir) { goSlide(si + dir); }
+    function goSlide(idx) {
+      if (idx < 0 || idx >= SLIDES.length) return;
+      document.querySelectorAll('.carousel-slide').forEach((s, i) => s.classList.toggle('on', i === idx));
+      document.querySelectorAll('.csl-dot').forEach((d, i) => d.classList.toggle('on', i === idx));
+      si = idx;
+      document.getElementById('slcounter').textContent = (idx + 1) + ' / ' + SLIDES.length;
+    }
+
+    buildCarousel();
+  </script>
+</body>
+
+</html>
