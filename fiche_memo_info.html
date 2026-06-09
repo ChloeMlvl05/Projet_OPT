@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographie — Communication Visuelle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: auto;
+            min-height: 100%;
+            overflow-y: auto;
+        }
+
+        :root {
+            --bg: #254e70;
+            --surface: #37718e;
+            --border: rgb(255, 255, 255);
+            --text_legend: #F0EDE8;
+            --text: rgba(240, 237, 232);
+            --muted: rgb(240, 237, 232);
+            --faint: rgba(240, 237, 232);
+
+            --c1: #5CE8A0;
+            --c2: #F5A623;
+            --c3: #7B6FFF;
+            --c4: #C33C54;
+            --c5: #00C9FF;
+            --c6: #FFD166;
+            --c7: #B8FF47;
+            --c8: #FF8CC8;
+        }
+
+        body {
+            background: #111;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            font-family: 'Instrument Sans', sans-serif;
+        }
+
+        .page {
+            width: 794px;
+            background: var(--bg);
+            position: relative;
+            overflow: visible;
+        }
+
+        /* BG pattern */
+        .page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255, 255, 255, 0.100) 39px, rgba(255, 255, 255, 0.052) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255, 255, 255, 0.100) 39px, rgba(255, 255, 255, 0.025) 40px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .inner {
+            position: relative;
+            z-index: 1;
+            padding: 44px 44px 36px;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .header-left {}
+
+        .eyebrow {
+            font-family: 'Syne', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .main-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text_legend);
+            line-height: 1.05;
+            letter-spacing: -.02em;
+        }
+
+        .main-title em {
+            font-style: normal;
+            color: var(--text_legend);
+        }
+
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            padding-top: 6px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 16px;
+        }
+
+        .leg {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--text_legend);
+            font-weight: 500;
+        }
+
+        .leg-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .leg-icon.ok {
+            background: rgba(92, 232, 160, 0.15);
+            color: var(--c1);
+            border: 1px solid rgba(92, 232, 160, 0.3);
+            
+        }
+
+        .leg-icon.no {
+            background: rgba(255, 107, 107, 0.15);
+            color: var(--c4);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            margin-bottom: 28px;
+        }
+
+        /* ── GRID ── */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* ── THEME CARD ── */
+        .theme {
+            background: var(--surface);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: border-color .2s;
+        }
+
+        .theme:hover {
+            border-color: rgba(255, 255, 255);
+        }
+
+        .theme-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 14px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .theme-accent {
+            width: 4px;
+            height: 28px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .theme-meta {
+            flex: 1;
+        }
+
+        .theme-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            opacity: .4;
+            color: var(--text);
+            margin-bottom: 1px;
+        }
+
+        .theme-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -.01em;
+        }
+
+        .theme-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .col {
+            padding: 11px 13px 13px;
+        }
+
+        .col.ok {
+            border-right: 1px solid var(--border);
+        }
+
+        .col-head {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+
+        .col-pip {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            font-size: 9px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .col.ok .col-pip {
+            background: rgba(92, 232, 160, 0.321);
+            color: rgb(11, 250, 127);
+        }
+
+        .col.no .col-pip {
+            background: rgba(255, 107, 107, 0.300);
+            color:  rgba(188, 1, 1);
+        }
+
+        .col-label {
+            font-size: 9.5px;
+            font-weight: 500;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .col.ok .col-label {
+            color: rgb(11, 250, 127);
+        }
+
+        .col.no .col-label {
+            color: rgba(188, 1, 1, 0.879);
+        }
+
+        .rules {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .rules li {
+            font-size: 10.5px;
+            line-height: 1.4;
+            color: rgba(240, 237, 232, 0.65);
+            padding-left: 12px;
+            position: relative;
+        }
+
+        /* ── GOLDEN RULE BANNER ── */
+        .golden {
+            margin-top: 16px;
+            background: linear-gradient(90deg, rgba(92, 232, 160, 0.237) 0%, rgba(0, 200, 255, 0.237) 100%);
+            border: 1px solid rgba(92, 232, 160, 0.2);
+            border-radius: 10px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .golden-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+            line-height: 1;
+            color:#bda509;
+        }
+
+        .golden-text {}
+
+        .golden-eyebrow {
+            font-family: 'Syne', sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--c1);
+            margin-bottom: 3px;
+        }
+
+        .golden-body {
+            font-size: 12px;
+            color: rgba(240, 237, 232, 0.75);
+            line-height: 1.5;
+        }
+
+        .golden-body strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-left {
+            font-size: 10px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--muted);
+        }
+
+        .footer-right {
+            font-family: 'Syne', sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(240, 237, 232, 0.2);
+        }
+
+        /* ── COLORS per theme ── */
+        .t1 {
+            background: var(--bg);
+        }
+
+        .t2 {
+            background: var(--bg);
+        }
+
+        .t3 {
+            background: var(--bg);
+        }
+
+        .t4 {
+            background: var(--bg);
+        }
+
+        .t5 {
+            background: var(--bg);
+        }
+
+        .t6 {
+            background: var(--bg);
+        }
+
+        .t7 {
+            background: var(--bg);
+        }
+
+        .t8 {
+            background: var(--bg);
+        }
+
+        @media print {
+            body {
+                background: #0F0F0F;
+                padding: 0;
+            }
+
+            .page {
+                width: 100%;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="inner">
+
+            <div class="header">
+                <div class="header-left">
+                    <div class="eyebrow">Atelier · Fiche mémo</div>
+                    <div class="main-title">Communication<br><em>Visuelle</em></div>
+                </div>
+                <div class="header-right">
+                    <div class="legend">
+                        <div class="leg">
+                            <div class="leg-icon ok">↗</div> À faire
+                        </div>
+                        <div class="leg">
+                            <div class="leg-icon no">↘</div> À éviter
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="grid">
+
+                <div class="theme">
+                    <div class="theme-head">
+                        <div class="theme-accent t1"></div>
+                        <div class="theme-meta">
+                            <div class="theme-num">01</div>
+                            <div class="theme-name">Hiérarchie visuelle</div>
+                        </div>
+                    </div>
+                    <div class="theme-body">
+                        <div class="col ok">
+                            <div class="col-head">
+                                <div class="col-pip">↗</div><span class="col-label">À faire</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Titre &gt; sous-titre &gt; corps : niveaux distincts</li>
+                                <li>¤   Info clé en avant : taille, couleur, position</li>
+                                <li>¤   Guider le regard avec intention</li>
+                            </ul>
+                        </div>
+                        <div class="col no">
+                            <div class="col-head">
+                                <div class="col-pip">↘</div><span class="col-label">À éviter</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Tout en gras, tout en grand : rien ne ressort</li>
+                                <li>¤   Noyer l'essentiel dans une masse uniforme</li>
+                                <li>¤   Plusieurs éléments "prioritaires" en même temps</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme">
+                    <div class="theme-head">
+                        <div class="theme-accent t2"></div>
+                        <div class="theme-meta">
+                            <div class="theme-num">02</div>
+                            <div class="theme-name">Typographie</div>
+                        </div>
+                    </div>
+                    <div class="theme-body">
+                        <div class="col ok">
+                            <div class="col-head">
+                                <div class="col-pip">↗</div><span class="col-label">À faire</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   2 polices max (1 titre + 1 corps)</li>
+                                <li>¤   Corps de texte min. 14–16 px en projection</li>
+                                <li>¤   Contraste fort texte / fond</li>
+                            </ul>
+                        </div>
+                        <div class="col no">
+                            <div class="col-head">
+                                <div class="col-pip">↘</div><span class="col-label">À éviter</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Mélanger 4 polices ou plus</li>
+                                <li>¤   Texte trop petit, illisible projeté</li>
+                                <li>¤   Texte clair sur fond clair (ou inverse)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme">
+                    <div class="theme-head">
+                        <div class="theme-accent t3"></div>
+                        <div class="theme-meta">
+                            <div class="theme-num">03</div>
+                            <div class="theme-name">Couleurs</div>
+                        </div>
+                    </div>
+                    <div class="theme-body">
+                        <div class="col ok">
+                            <div class="col-head">
+                                <div class="col-pip">↗</div><span class="col-label">À faire</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Palette cohérente : 3–4 couleurs max</li>
+                                <li>¤   Couleur porteuse de sens (alerte, ok…)</li>
+                                <li>¤   Même palette sur tous les supports</li>
+                            </ul>
+                        </div>
+                        <div class="col no">
+                            <div class="col-head">
+                                <div class="col-pip">↘</div><span class="col-label">À éviter</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Trop de couleurs vives en compétition</li>
+                                <li>¤   Couleurs purement décoratives</li>
+                                <li>¤   Palette différente d'un support à l'autre</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme">
+                    <div class="theme-head">
+                        <div class="theme-accent t4"></div>
+                        <div class="theme-meta">
+                            <div class="theme-num">04</div>
+                            <div class="theme-name">Espacement &amp; lisibilité</div>
+                        </div>
+                    </div>
+                    <div class="theme-body">
+                        <div class="col ok">
+                            <div class="col-head">
+                                <div class="col-pip">↗</div><span class="col-label">À faire</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Laisser du blanc autour des éléments clés</li>
+                                <li>¤   Aligner sur une grille cohérente</li>
+                                <li>¤   Regrouper les éléments liés</li>
+                            </ul>
+                        </div>
+                        <div class="col no">
+                            <div class="col-head">
+                                <div class="col-pip">↘</div><span class="col-label">À éviter</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Remplir tout l'espace : surcharge visuelle</li>
+                                <li>¤   Éléments flottants, mal alignés</li>
+                                <li>¤   Éléments proches mais non liés</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme">
+                    <div class="theme-head">
+                        <div class="theme-accent t5"></div>
+                        <div class="theme-meta">
+                            <div class="theme-num">05</div>
+                            <div class="theme-name">Contenu &amp; message</div>
+                        </div>
+                    </div>
+                    <div class="theme-body">
+                        <div class="col ok">
+                            <div class="col-head">
+                                <div class="col-pip">↗</div><span class="col-label">À faire</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Un visuel = une idée principale</li>
+                                <li>¤   Mots-clés et phrases courtes</li>
+                                <li>¤   Adapter le langage à l'audience</li>
+                            </ul>
+                        </div>
+                        <div class="col no">
+                            <div class="col-head">
+                                <div class="col-pip">↘</div><span class="col-label">À éviter</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Trop d'infos sur un seul visuel</li>
+                                <li>¤   Copier-coller un texte entier dans une slide</li>
+                                <li>¤   Jargon incompris du public</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme">
+                    <div class="theme-head">
+                        <div class="theme-accent t6"></div>
+                        <div class="theme-meta">
+                            <div class="theme-num">06</div>
+                            <div class="theme-name">Images &amp; icônes</div>
+                        </div>
+                    </div>
+                    <div class="theme-body">
+                        <div class="col ok">
+                            <div class="col-head">
+                                <div class="col-pip">↗</div><span class="col-label">À faire</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Images nettes, cohérentes avec le message</li>
+                                <li>¤   Icônes simples, universelles, même famille</li>
+                                <li>¤   Style visuel homogène sur tout le support</li>
+                            </ul>
+                        </div>
+                        <div class="col no">
+                            <div class="col-head">
+                                <div class="col-pip">↘</div><span class="col-label">À éviter</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Images pixelisées, étirées ou déformées</li>
+                                <li>¤   Mélanger styles (photo + clipart + cartoon)</li>
+                                <li>¤   Icônes décoratives sans valeur d'information</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme">
+                    <div class="theme-head">
+                        <div class="theme-accent t7"></div>
+                        <div class="theme-meta">
+                            <div class="theme-num">07</div>
+                            <div class="theme-name">Structure &amp; cohérence</div>
+                        </div>
+                    </div>
+                    <div class="theme-body">
+                        <div class="col ok">
+                            <div class="col-head">
+                                <div class="col-pip">↗</div><span class="col-label">À faire</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Même gabarit d'une slide à l'autre</li>
+                                <li>¤   Séquencer et numéroter les étapes</li>
+                                <li>¤   Soigner titre et transitions entre parties</li>
+                            </ul>
+                        </div>
+                        <div class="col no">
+                            <div class="col-head">
+                                <div class="col-pip">↘</div><span class="col-label">À éviter</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Mise en page différente à chaque slide</li>
+                                <li>¤   Animations et transitions excessives</li>
+                                <li>¤   Aucun fil conducteur visuel</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme">
+                    <div class="theme-head">
+                        <div class="theme-accent t8"></div>
+                        <div class="theme-meta">
+                            <div class="theme-num">08</div>
+                            <div class="theme-name">Accessibilité</div>
+                        </div>
+                    </div>
+                    <div class="theme-body">
+                        <div class="col ok">
+                            <div class="col-head">
+                                <div class="col-pip">↗</div><span class="col-label">À faire</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Vérifier le contraste texte / fond (WCAG)</li>
+                                <li>¤   Combiner couleur + icône pour l'information</li>
+                                <li>¤   Taille adaptée à la projection ou l'impression</li>
+                            </ul>
+                        </div>
+                        <div class="col no">
+                            <div class="col-head">
+                                <div class="col-pip">↘</div><span class="col-label">À éviter</span>
+                            </div>
+                            <ul class="rules">
+                                <li>¤   Rouge/vert seuls : problème pour daltoniens</li>
+                                <li>¤   Texte sur image sans zone de contraste</li>
+                                <li>¤   Polices trop petites en grand écran</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="golden">
+                <div class="golden-icon">◈</div>
+                <div class="golden-text">
+                    <div class="golden-eyebrow">Règle d'or</div>
+                    <div class="golden-body">Avant de publier un visuel, demande-toi : <strong>quelqu'un qui ne connaît
+                            pas le sujet comprend-il l'essentiel en moins de 5 secondes ?</strong></div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-left">
+                    <span>Atelier communication visuelle</span>
+                    <div class="footer-dot"></div>
+                    <span>Fiche mémo · 8 thèmes</span>
+                </div>
+                <div class="footer-right">commvisuelle.fiche</div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
